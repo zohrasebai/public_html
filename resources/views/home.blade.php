@@ -1,17 +1,16 @@
-
 @extends('layouts.app')
 
-@section('title', 'Qualipro - Home')
-
 @section('content')
-	<div class="bg-secondery color-white" id="scroll" style="display: inline;"><i class="fa fa-angle-up"></i></div>
+    @include('partials.header')
+    
+    <main>
+        @include('partials.slider') {{-- C'est ici que se trouve votre vidéo --}}
+        
+        <div id="about" class="pt-20"> @include('partials.about') </div>
+        <div id="causes" class="pt-20"> @include('partials.causes') </div>
+        <div id="references" class="pt-20"> @include('partials.references') </div>
+        <div id="contact" class="pt-20 pb-20"> @include('partials.contact') </div>
+    </main>
 
-   @include('partials.header')
-<div id="home"> @include('partials.slider') </div>
-<div id="about"> @include('partials.about') </div>
-<div id="causes"> @include('partials.causes') </div>
-<div id="references"> @include('partials.references') </div>
-<div id="contact"> @include('partials.contact') </div>
-@include('partials.footer')
-
+    @include('partials.footer')
 @endsection
