@@ -31,12 +31,11 @@
             <ul class="navbar-nav ms-auto align-items-center gap-4 fw-bold" style="font-size: 14px; text-transform: uppercase;">
                 
                 <li class="nav-item">
-                    <a class="nav-link" href="#home" style="color: #dd3513 !important; font-weight: 600 !important;">Accueil</a>
+                    <a class="nav-link custom-link" href="#home">Accueil</a>
                 </li>
 
-                {{-- Menu : Qui nous sommes --}}
-                <li class="nav-item dropdown custom-nav-dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button" style="color: #dd3513 !important; font-weight: 600 !important;">
+                <li class="nav-item dropdown hover-dropdown">
+                    <a class="nav-link dropdown-toggle custom-link" href="#" id="aboutDropdown" role="button">
                         Qui nous sommes
                     </a>
                     <ul class="dropdown-menu shadow border-0" aria-labelledby="aboutDropdown">
@@ -47,9 +46,8 @@
                     </ul>
                 </li>
 
-                {{-- Menu : Nos Services --}}
-                <li class="nav-item dropdown custom-nav-dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" style="color: #dd3513 !important; font-weight: 600 !important;">
+                <li class="nav-item dropdown hover-dropdown">
+                    <a class="nav-link dropdown-toggle custom-link" href="#" id="servicesDropdown" role="button">
                         Nos Services
                     </a>
                     <ul class="dropdown-menu shadow border-0" aria-labelledby="servicesDropdown">
@@ -60,7 +58,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#references" style="color: #dd3513 !important; font-weight: 600 !important;">Nos Références</a>
+                    <a class="nav-link custom-link" href="#references">Nos Références</a>
                 </li>
             </ul>
         </div>
@@ -68,28 +66,40 @@
 </nav>
 
 <style>
-    /* Garde les sous-titres en VERT */
-    .dropdown-item {
+    /* TITRES EN VERT PAR DÉFAUT */
+    .custom-link {
         color: #006a4e !important;
-        text-transform: none; /* Plus propre pour les sous-menus */
+        font-weight: 700 !important;
+        transition: all 0.3s ease;
+    }
+
+    /* COULEUR BLEU CLAIR AU SURVOL (TOUCHER) */
+    .custom-link:hover, 
+    .hover-dropdown:hover .custom-link {
+        color: #00aaff !important;
+    }
+
+    /* STYLE DES SOUS-TITRES (Menu Déroulant) */
+    .dropdown-item {
+        color: #006a4e !important; /* Vert */
+        text-transform: none;
         font-weight: 600;
-        padding: 8px 20px;
+        padding: 10px 20px;
+        transition: 0.3s;
     }
 
     .dropdown-item:hover {
         background-color: #f4f7f6;
-        color: #dd3513 !important; /* Devient rouge au survol */
+        color: #00aaff !important; /* Bleu clair au survol */
+        padding-left: 25px;
     }
 
-    /* Ouverture au survol pour le design */
+    /* OUVERTURE AUTOMATIQUE AU SURVOL (Desktop) */
     @media (min-width: 992px) {
-        .custom-nav-dropdown:hover .dropdown-menu {
+        .hover-dropdown:hover .dropdown-menu {
             display: block;
             margin-top: 0;
+            border-top: 3px solid #00aaff; /* Ligne bleu clair en haut du menu */
         }
-    }
-
-    .dropdown-menu {
-        border-top: 3px solid #006a4e !important; /* Rappel du vert */
     }
 </style>
