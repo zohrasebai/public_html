@@ -1,4 +1,5 @@
 @php
+    // La liste de vos images telle qu'elle apparaît dans votre dossier 'paternes'
     $partners = [
         'partner1.jpg', 'partner2.png', 'partner3.jpg', 
         'partner4.jpg', 'partner5.jpg', 'partner6.png', 'partner7.png'
@@ -27,7 +28,7 @@
         width: auto !important;
         object-fit: contain;
     }
-    /* Style des points de navigation */
+    /* Style des points sous le slider */
     .owl-dots { text-align: center; margin-top: 20px; display: block !important; }
     .owl-dot { height: 12px; width: 12px; background: #ccc !important; border-radius: 50%; display: inline-block; margin: 5px; border: none; }
     .owl-dot.active { background: #00aaff !important; }
@@ -36,12 +37,15 @@
 <section id="section-references">
     <div class="container">
         <div class="row align-items-center">
+            
             <div class="col-lg-5">
                 <div class="title mb-4">
-                    <span style="color: #006a4e; font-weight: 700; text-transform: uppercase; font-size: 13px;">Clients qui nous font confiance...</span>
-                    <h2 class="fw-bold mb-2" style="color: #002e5b; font-size: 34px;">Nos Partenaires & Clients</h2>
+                    <span style="color: #006a4e; font-weight: 700; text-transform: uppercase; font-size: 13px;">ILS NOUS FONT CONFIANCE...</span>
+                    <h2 class="fw-bold mb-2" style="color: #002e5b; font-size: 34px;">Nos Références</h2>
                     <div style="width: 50px; height: 3px; background-color: #00aaff; margin-bottom: 20px;"></div>
-                    <p class="text-muted" style="font-size: 15px;">Nous collaborons avec des entreprises de divers secteurs (agroalimentaire, pharmaceutique, cosmétique) pour bâtir des démarches d’amélioration continue et garantir leur conformité aux normes.</p>
+                    <p class="text-muted" style="font-size: 15px;">
+                        Nous collaborons avec des entreprises de divers secteurs pour bâtir des démarches d'amélioration continue.
+                    </p>
                 </div>
             </div>
 
@@ -50,12 +54,13 @@
                     @foreach($partners as $file)
                         <div class="item">
                             <div class="partner-card">
-                                <img src="/assets/images/paternes/{{ $file }}" alt="Client">
+                                <img src="/assets/images/paternes/{{ $file }}" alt="Client QualiPro+">
                             </div>
                         </div>
                     @endforeach
                 </div>
             </div>
+
         </div>
     </div>
 </section>
@@ -65,18 +70,18 @@
 
 <script>
     $(document).ready(function() {
-        function startSlider() {
-            var slider = $('#slider-references');
-            if (slider.length && typeof $.fn.owlCarousel !== 'undefined') {
-                slider.owlCarousel({
+        function activateSlider() {
+            var $slider = $('#slider-references');
+            if ($slider.length && typeof $.fn.owlCarousel !== 'undefined') {
+                $slider.owlCarousel({
                     loop: true,
                     margin: 10,
                     autoplay: true,
-                    autoplayTimeout: 2000,
+                    autoplayTimeout: 2500,
                     autoplayHoverPause: true,
                     smartSpeed: 1000,
-                    nav: false,
                     dots: true,
+                    nav: false,
                     responsive: {
                         0: { items: 1 },
                         600: { items: 2 },
@@ -85,7 +90,11 @@
                 });
             }
         }
-        startSlider();
-        setTimeout(startSlider, 1000); // Sécurité si chargement lent
+
+        // Lancement immédiat
+        activateSlider();
+        
+        // Sécurité : relancement après un court délai pour être sûr
+        setTimeout(activateSlider, 800);
     });
 </script>
