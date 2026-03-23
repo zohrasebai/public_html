@@ -14,9 +14,9 @@
         </div>
         <div class="header-social d-flex gap-3 align-items-center">
             <span class="d-none d-md-inline opacity-75 " style="font-weight: 900 !important;">Nous rejoindre :</span>
-            <a href="#" style="color: #006a4e; transition: 0.5s;font-size: 18px;"><i class="ri-linkedin-box-fill">   </i></a>
-            <a href="#" style="color:#006a4e;transition: 0.5s; font-size: 18px;"><i class="ri-facebook-box-fill">   </i></a>
-            <a href="#" style="color: #006a4e;transition: 0.5s; font-size: 18px;"><i class="ri-instagram-fill">  </i></a>
+            <a href="#" style="color: #006a4e; transition: 0.5s;font-size: 20px;"><i class="ri-linkedin-box-fill">   </i></a>
+            <a href="#" style="color:#006a4e;transition: 0.5s; font-size: 20px;"><i class="ri-facebook-box-fill">   </i></a>
+            <a href="#" style="color: #006a4e;transition: 0.5s; font-size: 20px;"><i class="ri-instagram-fill">  </i></a>
         </div>
     </div>
 </div>
