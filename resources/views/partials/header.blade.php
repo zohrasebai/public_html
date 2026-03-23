@@ -4,19 +4,19 @@
     <div class="container d-flex justify-content-between align-items-center">
         <div class="header-contact d-flex gap-4">
            <span style="font-weight: 700;">
-                <i class="ri-phone-fill" style="color: #008542; margin-right: 5px; font-size: 16px;"></i> 
-                {{ $global_settings['phone'] ?? ' 0699 75 80 30 / 0776 70 75 80  ' }}
+                <i class="ri-phone-fill" style="color: #006a4e; margin-right: 5px; font-size: 16px;">  </i> 
+                {{ $global_settings['phone'] ?? ' 0699 75 80 30 / 0776 70 75 80    ' }}
             </span>
             <span style="font-weight: 700;">
-                <i class="ri-mail-fill" style="color: #008542; margin-right: 5px; font-size: 16px;"></i> 
+                <i class="ri-mail-fill" style="color: #006a4e; margin-right: 5px; font-size: 16px;">   </i> 
                 {{ $global_settings['email'] ?? ' qualiproplus16@gmail.com' }}
             </span>
         </div>
         <div class="header-social d-flex gap-3 align-items-center">
             <span class="d-none d-md-inline opacity-75 " style="font-weight: 900 !important;">Nous rejoindre :</span>
-            <a href="#" style="color: #008542; font-size: 18px;"><i class="ri-linkedin-box-fill"> </i></a>
-            <a href="#" style="color:#008542; font-size: 18px;"><i class="ri-facebook-box-fill"> </i></a>
-            <a href="#" style="color: #008542; font-size: 18px;"><i class="ri-instagram-fill"></i></a>
+            <a href="#" style="color: #006a4e; font-size: 18px;"><i class="ri-linkedin-box-fill">   </i></a>
+            <a href="#" style="color:#006a4e; font-size: 18px;"><i class="ri-facebook-box-fill">   </i></a>
+            <a href="#" style="color: #006a4e; font-size: 18px;"><i class="ri-instagram-fill">  </i></a>
         </div>
     </div>
 </div>

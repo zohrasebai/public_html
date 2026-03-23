@@ -16,7 +16,7 @@
     ];
 
     // Couleur exacte du vert du logo
-    $vertLogo = "#008542"; 
+    $vertLogo = "#006a4e"; 
     $bleuClair = "#00aaff";
 @endphp
 
@@ -25,7 +25,7 @@
         <div class="row g-4">
             
             <div class="col-lg-4 col-md-6">
-                <img src="{{ $footerLogo }}" alt="QualiPro+" style="height: 55px; margin-bottom: 15px;">
+                <img src="{{ $footerLogo }}" alt="QualiPro+" style="height: 45px; margin-bottom: 15px;">
                 <p style="font-size: 14px; line-height: 1.8; color: rgba(255,255,255,0.7); font-weight: 400; font-style: italic; letter-spacing: 0.3px;">
                     {{ $footerText }}
                 </p>
