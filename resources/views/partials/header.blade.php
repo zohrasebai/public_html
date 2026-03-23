@@ -2,15 +2,17 @@
 
 <div class="top-header" style="background-color: #002e5b; color: #ffffff; padding: 8px 0; font-size: 13px;">
     <div class="container d-flex justify-content-between align-items-center">
-        <div class="header-contact d-flex gap-4">
-           <span style="font-weight: 700;">
-                <i class="ri-phone-fill" style="color: #006a4e; margin-right: 8px: 5px; font-size: 16px;margin-left: 8px;">  </i> 
-                {{ $global_settings['phone'] ?? ' 0699 75 80 30 / 0776 70 75 80    ' }}
-            </span>
-            <span style="font-weight: 700;">
-                <i class="ri-mail-fill" style="color: #006a4e; margin-right: 8px: 5px; font-size: 16px;margin-left: 8px;">   </i> 
-                {{ $global_settings['email'] ?? ' qualiproplus16@gmail.com' }}
-            </span>
+        <div class="header-contact d-flex align-items-center">
+    <span style="font-weight: 700; margin-right: 30px;">
+        <i class="ri-phone-fill" style="color: #006a4e; margin-right: 8px; font-size: 16px;"></i> 
+        {{ $global_settings['phone'] ?? '+213 699 75 80 30 / +213 776 70 75 80' }}
+    </span>
+
+    <span style="font-weight: 700;">
+        <i class="ri-mail-fill" style="color: #006a4e; margin-right: 8px; font-size: 16px;"></i> 
+        {{ $global_settings['email'] ?? 'qualiproplus16@gmail.com' }}
+    </span>
+</div>
         </div>
         <div class="header-social d-flex gap-3 align-items-center">
             <span class="d-none d-md-inline opacity-75 " style="font-weight: 900 !important;">Nous rejoindre :</span>
