@@ -25,7 +25,7 @@
         <div class="row g-4">
             
             <div class="col-lg-4 col-md-6">
-                <img src="{{ $footerLogo }}" alt="QualiPro+" style=" height: 80px; object-fit: contain; margin-bottom: 20px;">
+                <img src="{{ $footerLogo }}" alt="QualiPro+" style=" height: 90px;">
                 <p style="font-size: 16px; line-height: 1.8; color:  #ffffff; font-weight: 400; ">
                     {{ $footerText }}
                 </p>
