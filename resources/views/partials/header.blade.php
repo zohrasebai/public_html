@@ -1,40 +1,35 @@
-<div class="top-header-area bg-dark-blue py-2" style="background-color: #002e5b; color: #ffffff;">
+<div class="top-header" style="background-color: #002e5b; color: #ffffff; padding: 8px 0; font-size: 13px;">
     <div class="container d-flex justify-content-between align-items-center">
-        <div class="top-left-info d-flex gap-4 fs-13">
-            <span><i class="ri-phone-fill me-1" style="color: #ffcc00;"></i> {{ $global_settings['phone'] ?? '+213 699 75 80 30' }}</span>
-            <span class="d-none d-md-inline"><i class="ri-mail-fill me-1" style="color: #ffcc00;"></i> {{ $global_settings['email'] ?? 'contact@qualiproplus.com' }}</span>
+        <div class="header-contact d-flex gap-4">
+            <span><i class="ri-phone-fill" style="color: #ffcc00;"></i> {{ $phone }}</span>
+            <span><i class="ri-mail-fill" style="color: #ffcc00;"></i> {{ $email }}</span>
         </div>
-        <div class="top-right-social d-flex gap-3 align-items-center fs-14">
-            <span class="d-none d-lg-inline opacity-75">Nous rejoindre :</span>
-            <a href="{{ $global_settings['facebook'] ?? '#' }}" class="text-white hover-gold"><i class="ri-facebook-box-fill"></i></a>
-            <a href="{{ $global_settings['linkedin'] ?? '#' }}" class="text-white hover-gold"><i class="ri-linkedin-box-fill"></i></a>
-            <a href="{{ $global_settings['instagram'] ?? '#' }}" class="text-white hover-gold"><i class="ri-instagram-fill"></i></a>
+        <div class="header-social d-flex gap-3 align-items-center">
+            <span class="d-none d-md-inline opacity-75">Nous rejoindre :</span>
+            <a href="#" style="color: white; font-size: 16px;"><i class="ri-facebook-box-fill"></i></a>
+            <a href="#" style="color: white; font-size: 16px;"><i class="ri-linkedin-box-fill"></i></a>
+            <a href="#" style="color: white; font-size: 16px;"><i class="ri-instagram-fill"></i></a>
         </div>
     </div>
 </div>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm py-3">
+<nav class="navbar navbar-expand-lg bg-white sticky-top shadow-sm" style="padding: 15px 0;">
     <div class="container">
-        <a class="navbar-brand" href="{{ route('home') }}">
-            <img src="{{ asset('assets/images/logo/logo.png') }}" alt="QualiPro Plus" style="height: 60px;">
+        <a class="navbar-brand" href="{{ $home_link }}">
+            <img src="{{ $logo }}" alt="QualiPro+" style="height: 50px;">
         </a>
 
-        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-            <i class="ri-menu-3-line fs-24"></i>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenu">
+            <i class="ri-menu-line"></i>
         </button>
 
-        <div class="collapse navbar-collapse" id="mainNav">
-            <ul class="navbar-nav ms-auto gap-4 fw-bold text-uppercase fs-12 tracking-wider">
-                @foreach($nav_links as $item)
-                    <li class="nav-item">
-                        <a class="nav-link text-dark-blue p-0" href="{{ $item->url }}">{{ $item->title }}</a>
-                    </li>
-                @endforeach
-                <li class="nav-item">
-                    <a class="btn btn-primary rounded-pill px-4 py-2 fs-12 fw-bold" href="{{ route('contact') }}" style="background-color: #002e5b; border: none;">
-                        Demander Devis
-                    </a>
-                </li>
+        <div class="collapse navbar-collapse" id="mainMenu">
+            <ul class="navbar-nav ms-auto align-items-center gap-4 fw-bold" style="font-size: 14px; text-transform: uppercase;">
+                <li class="nav-item"><a class="nav-link text-dark" href="#home">Accueil</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="#about">Qui Sommes-Nous</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="#causes">Nos Services</a></li>
+                <li class="nav-item"><a class="nav-link text-dark" href="#references">Nos references</a></li>
+             
             </ul>
         </div>
     </div>
