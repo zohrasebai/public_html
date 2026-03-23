@@ -21,7 +21,7 @@
     </div>
 </div>
 
-<nav class="navbar navbar-expand-lg bg-white sticky-top shadow-sm" style="background-color: #c2c4c6;padding: 15px 0;">
+<nav class="navbar navbar-expand-lg bg-white sticky-top shadow-sm" style="background-color: #b4b8bb;padding: 11px 0;">
     <div class="container">
         <a class="navbar-brand" href="/">
             <img src="{{ asset('assets/images/logo/logo.png') }}" alt="QualiPro+" style="height: 70px;">
