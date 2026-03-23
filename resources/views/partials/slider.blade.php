@@ -1,33 +1,24 @@
-<section id="home" class="relative h-screen min-h-[600px] flex items-center overflow-hidden">
-    <div class="absolute inset-0 z-0">
-        <video autoplay loop muted playsinline class="w-full h-full object-cover scale-105">
-            <source src="{{ asset('assets/videos/funfactSoul.mp4') }}" type="video/mp4">
-        </video>
-        <div class="absolute inset-0 bg-gradient-to-r from-[#002e5b]/90 to-black/40"></div>
-    </div>
+<section id="hero-video" class="position-relative vh-100 overflow-hidden d-flex align-items-center">
+    <video autoplay loop muted playsinline class="position-absolute w-100 h-100 object-fit-cover z-n1">
+        <source src="{{ asset('assets/videos/funfactSoul.mp4') }}" type="video/mp4">
+    </video>
 
-    <div class="container mx-auto px-6 relative z-10">
-        <div class="max-w-4xl animate-fade-in-up">
-            <h1 class="text-white text-5xl md:text-7xl font-black leading-tight mb-6">
-                QualiPro+ : Votre partenaire pour <span class="text-[#ffcc00]">l'excellence.</span>
-            </h1>
-            <p class="text-gray-200 text-lg md:text-xl mb-10 max-w-2xl leading-relaxed border-l-4 border-[#ffcc00] pl-6">
-                Nous sommes un cabinet spécialisé dans l'accompagnement des entreprises pour l'obtention de certifications internationales et l'optimisation de la performance.
-            </p>
-            <div class="flex flex-wrap gap-4">
-                <a href="#contact" class="bg-[#ffcc00] text-[#002e5b] px-10 py-4 rounded-full font-black uppercase text-sm hover:bg-white transition-all shadow-xl">
-                    Demander un Audit
-                </a>
-                <a href="#about" class="bg-white/10 backdrop-blur-md text-white border border-white/30 px-10 py-4 rounded-full font-black uppercase text-sm hover:bg-white/20 transition-all">
-                    Découvrir l'équipe
-                </a>
-            </div>
+    <div class="position-absolute w-100 h-100 bg-black opacity-50 z-0"></div>
+
+    <div class="container position-relative z-1 text-white text-center">
+        <h1 class="display-3 fw-bold mb-4 animate__animated animate__fadeInDown">
+            QualiPro+ : Votre partenaire pour l’excellence.
+        </h1>
+        <p class="fs-4 mb-5 opacity-90 mx-auto" style="max-width: 800px;">
+            Accompagnement expert pour vos certifications ISO et l'optimisation de vos processus.
+        </p>
+        <div class="d-flex justify-content-center gap-3">
+            <a href="#contact" class="btn btn-warning btn-lg rounded-pill px-5 fw-bold text-dark-blue">Contactez-nous</a>
+            <a href="#causes" class="btn btn-outline-light btn-lg rounded-pill px-5 fw-bold">Nos Services</a>
         </div>
     </div>
-
-    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 z-20 animate-bounce">
-        <a href="#about" class="text-white opacity-50 hover:opacity-100 transition">
-            <i class="fa fa-angle-down text-3xl"></i>
-        </a>
+    
+    <div class="position-absolute bottom-0 start-50 translate-middle-x mb-4 text-white opacity-50">
+        <i class="ri-arrow-down-s-line fs-1 animate-bounce"></i>
     </div>
 </section>
