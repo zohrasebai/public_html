@@ -25,8 +25,8 @@
         <div class="row g-4">
             
             <div class="col-lg-4 col-md-6">
-                <img src="{{ $footerLogo }}" alt="QualiPro+" style="height: 30px; margin-bottom: 20px;">
-                <p style="font-size: 14px; line-height: 1.8; color:  #ffffff; font-weight: 400; font-style: italic; letter-spacing: 0.3px;">
+                <img src="{{ $footerLogo }}" alt="QualiPro+" style="height: 30px; margin-bottom: 40px;">
+                <p style="font-size: 16px; line-height: 1.8; color:  #ffffff; font-weight: 400; ">
                     {{ $footerText }}
                 </p>
             </div>
@@ -39,7 +39,7 @@
                     @foreach($footerLinks as $link)
                         <li class="mb-2">
                             <a href="{{ $link['url'] }}" class="text-white text-decoration-none small fw-bold footer-link-hover">
-                                <i class="ri-arrow-right-s-line me-1" style="color: {{ $bleuClair }};"></i> {{ $link['label'] }}
+                                <i class="ri-arrow-right-s-line me-1" style="color: {{ $vertLogo }};"></i> {{ $link['label'] }}
                             </a>
                         </li>
                     @endforeach
