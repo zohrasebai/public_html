@@ -73,7 +73,7 @@
         <div class="row justify-content-center">
             <div class="col-lg-10">
                 <p class="lead text-dark mb-4">
-                    Nos consultants et experts sont de haut niveau, une équipe pluridisciplinaire dotée d'expériences confirmées...
+                    Nos consultants et experts sont de haut niveau, une équipe pluridisciplinaire dotée d'expériences confirmées..
                 </p>
                 <p class="lead text-dark">
                     Notre équipe est composée de consultants certifiés et reconnus par les organismes les plus réputés.
