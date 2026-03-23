@@ -58,11 +58,11 @@
     <div class="ref-flex">
         
         <div class="ref-text">
-            <span style="color: #006a4e; font-weight: 700; text-transform: uppercase; font-size: 13px;">ILS NOUS FONT CONFIANCE...</span>
-            <h2 style="color: #002e5b; font-size: 34px; font-weight: 700; margin: 10px 0;">Nos Références</h2>
+            <span style="color: #006a4e; font-weight: 700; text-transform: uppercase; font-size: 13px;">Clients qui nous font confiance...</span>
+            <h2 style="color: #002e5b; font-size: 34px; font-weight: 700; margin: 10px 0;">Nos Partenaires & Clients</h2>
             <div style="width: 50px; height: 3px; background-color: #00aaff; margin-bottom: 20px;"></div>
             <p style="color: #666; font-size: 15px; line-height: 1.7;">
-                Nous collaborons avec des entreprises de divers secteurs pour bâtir des démarches d'amélioration continue.
+                Nous collaborons avec des entreprises de divers secteurs (agroalimentaire, pharmaceutique, cosmétique) pour bâtir des démarches d’amélioration continue et garantir leur conformité aux normes.
             </p>
         </div>
 
