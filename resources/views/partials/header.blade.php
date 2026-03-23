@@ -31,7 +31,17 @@
             <ul class="navbar-nav ms-auto align-items-center gap-4 fw-bold" style="font-size: 14px; text-transform: uppercase;">
                 {{-- Liens en Vert Foncé et Gras --}}
                 <li class="nav-item"><a class="nav-link" href="#home" style="color: #dd3513 !important; font-weight: 600 !important;">Accueil</a></li>
-                <li class="nav-item"><a class="nav-link" href="#about" style="color: #dd3513 !important; font-weight: 600 !important;">Qui Sommes-Nous</a></li>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="aboutDropdown" role="button">
+                    Qui nous sommes
+                  </a>
+                  <ul class="dropdown-menu shadow" aria-labelledby="aboutDropdown">
+                      <li><a class="dropdown-item" href="/mission">Notre Mission</a></li>
+                     <li><a class="dropdown-item" href="/valeurs">Nos Valeurs</a></li>
+                     <li><hr class="dropdown-divider"></li>
+                     <li><a class="dropdown-item" href="/equipe">Notre Équipe</a></li>
+                  </ul>
+                </li>
                 <li class="nav-item"><a class="nav-link" href="#causes" style="color: #dd3513 !important; font-weight: 600 !important;">Nos Services</a></li>
                 <li class="nav-item"><a class="nav-link" href="#references" style="color: #dd3513!important; font-weight: 600 !important;">Nos Références</a></li>
             </ul>
