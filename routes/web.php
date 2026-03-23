@@ -15,17 +15,18 @@ use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\OfferController;
 use App\Http\Controllers\Admin\PartnerController;
 
-
-
-
+// --- Pages Publiques ---
 Route::get('/', [SiteController::class, 'index'])->name('home');
+
+// Ajout de la route Causes (liée au SiteController pour les données)
+Route::get('/causes', [SiteController::class, 'causes'])->name('causes');
 
 Route::get('/a-propos', fn() => view('AboutUs'))->name('AboutUs');
 Route::get('/equipe', fn() => view('team'))->name('team');
 Route::get('/blog', fn() => view('blog'))->name('blog');
 Route::get('/processus', fn() => view('Process'))->name('Process');
 
-// Routes Spécifiques Soul
+// Routes Spécifiques Soul / Impact Social
 Route::get('/a-propos-soul', fn() => view('aboutsoul'))->name('aboutsoul');
 Route::get('/groupe-amis', fn() => view('friendband'))->name('friendband');
 Route::get('/tele-autisme', fn() => view('teleautism'))->name('teleautism');
@@ -52,18 +53,17 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     // Dashboard Principal
     Route::get('/tableau-de-bord', [DashboardController::class, 'index'])->name('dashboard');
     
-    // Paramètres (Téléphone, Email)
+    // Paramètres
     Route::get('/parametres', [DashboardController::class, 'settings'])->name('settings');
     Route::post('/parametres/update', [DashboardController::class, 'updateSettings'])->name('settings.update');
 
-    // Menu de Navigation
+    // Menu & Réalisations
     Route::get('/liens-navigation', [DashboardController::class, 'navLinks'])->name('nav-links');
     Route::post('/liens-navigation/update', [DashboardController::class, 'updateNavLinks'])->name('nav-links.update');
-
-    // Réalisations (Achievements)
     Route::get('/realisations', [DashboardController::class, 'achievements'])->name('achievements');
     Route::post('/realisations/update', [DashboardController::class, 'updateAchievements'])->name('achievements.update');
 
+    // Gestion des Sections (CRUD)
     Route::get('sliders', [SliderController::class, 'index'])->name('sliders.index');
     Route::put('sliders/{id}', [SliderController::class, 'update'])->name('sliders.update');
 
@@ -75,36 +75,22 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 
     Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
     Route::post('/services/store', [ServiceController::class, 'store'])->name('services.store');
-    
-    // حذف الخدمة
     Route::delete('/services/delete/{id}', [ServiceController::class, 'destroy'])->name('services.destroy');
 
+    Route::get('/core-values', [CoreValueController::class, 'index'])->name('core_values.index');
+    Route::put('/core-values/settings', [CoreValueController::class, 'updateSettings'])->name('core_values.update_settings');
+    Route::post('/core-values/item', [CoreValueController::class, 'storeItem'])->name('core_values.store_item');
+    Route::delete('/core-values/item/{id}', [CoreValueController::class, 'destroyItem'])->name('core_values.destroy_item');
 
+    Route::get('/testimonials', [TestimonialController::class, 'index'])->name('testimonials.index');
+    Route::put('/testimonials/settings', [TestimonialController::class, 'updateSettings'])->name('testimonials.update_settings');
+    Route::post('/testimonials/item', [TestimonialController::class, 'storeItem'])->name('testimonials.store_item');
+    Route::delete('/testimonials/item/{id}', [TestimonialController::class, 'destroyItem'])->name('testimonials.destroy_item');
 
-    
+    Route::get('/offer', [OfferController::class, 'index'])->name('offer.index');
+    Route::put('/offer/update', [OfferController::class, 'update'])->name('offer.update');
 
-Route::get('/core-values', [CoreValueController::class, 'index'])->name('core_values.index');
-Route::put('/core-values/settings', [CoreValueController::class, 'updateSettings'])->name('core_values.update_settings');
-Route::post('/core-values/item', [CoreValueController::class, 'storeItem'])->name('core_values.store_item');
-Route::delete('/core-values/item/{id}', [CoreValueController::class, 'destroyItem'])->name('core_values.destroy_item');
-
-
-
-
-Route::get('/testimonials', [TestimonialController::class, 'index'])->name('testimonials.index');
-Route::put('/testimonials/settings', [TestimonialController::class, 'updateSettings'])->name('testimonials.update_settings');
-Route::post('/testimonials/item', [TestimonialController::class, 'storeItem'])->name('testimonials.store_item');
-Route::delete('/testimonials/item/{id}', [TestimonialController::class, 'destroyItem'])->name('testimonials.destroy_item');
-
-
-Route::get('/offer', [OfferController::class, 'index'])->name('offer.index');
-Route::put('/offer/update', [OfferController::class, 'update'])->name('offer.update');
-
-
-Route::get('/partners', [PartnerController::class, 'index'])->name('partners.index');
+    Route::get('/partners', [PartnerController::class, 'index'])->name('partners.index');
     Route::post('/partners/store', [PartnerController::class, 'store'])->name('partners.store');
     Route::delete('/partners/{id}', [PartnerController::class, 'destroy'])->name('partners.destroy');
 });
-
-
-

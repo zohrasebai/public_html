@@ -9,7 +9,7 @@
    @include('partials.header')
 <div id="home"> @include('partials.slider') </div>
 <div id="about"> @include('partials.about') </div>
-<div id="services"> @include('partials.causes') </div>
+<div id="causes"> @include('partials.causes') </div>
 <div id="references"> @include('partials.references') </div>
 <div id="contact"> @include('partials.contact') </div>
 @include('partials.footer')
