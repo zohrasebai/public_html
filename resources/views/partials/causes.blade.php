@@ -8,18 +8,15 @@
 @endphp
 
 <section id="causes" class="bg-light py-5">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="title mb-30 w-75 text-center mx-auto wow animated slideInUp">
-                    <span style="color: #ffcc00; font-weight: bold; text-transform: uppercase;">{{ $causesSubtitle }}</span>
-                    <h2 class="pb-15 mb-20" style="color: #002e5b; font-weight: 800;">{{ $causesTitle }}</h2>
-                    <p class="text-gray-600">{{ $causesDesc }}</p>
-                </div>
-            </div>
-            
-            {{-- On utilise la variable $services envoyée par le SiteController --}}
-            @foreach($services as $item)
+   <div class="container">
+    <div class="text-center mb-5">
+        <span class="text-uppercase fw-bold" style="color: #ffcc00; letter-spacing: 2px;">{{ $causesSubtitle }}</span>
+        <h2 class="display-5 fw-bold" style="color: #002e5b;">{{ $causesTitle }}</h2>
+        <p class="text-muted mx-auto" style="max-width: 700px;">{{ $causesDesc }}</p>
+    </div>
+    
+    <div class="row"> 
+        @foreach($services as $item)
             <div class="col-12 col-md-6 col-lg-4">
                 <div class="service-4 p-30 mt-30 bg-white transition-5 shadow-sm hover:shadow-lg" 
                      style="min-height: 280px; border-radius: 12px; border-bottom: 4px solid #002e5b;">
