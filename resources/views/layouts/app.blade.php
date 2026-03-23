@@ -28,7 +28,7 @@
             transition: 0.3s;
         }
         .navbar-nav .nav-link:hover {
-            color: #ffcc00 !important; /* Jaune au survol */
+            color: #00a6ff !important; /* Jaune au survol */
         }
     </style>
 
