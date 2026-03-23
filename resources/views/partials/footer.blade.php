@@ -25,8 +25,8 @@
         <div class="row g-4">
             
             <div class="col-lg-4 col-md-6">
-                <img src="{{ $footerLogo }}" alt="QualiPro+" style="height: 45px; margin-bottom: 15px;">
-                <p style="font-size: 14px; line-height: 1.8; color: rgba(255,255,255,0.7); font-weight: 400; font-style: italic; letter-spacing: 0.3px;">
+                <img src="{{ $footerLogo }}" alt="QualiPro+" style="height: 30px; margin-bottom: 20px;">
+                <p style="font-size: 14px; line-height: 1.8; color:  #ffffff; font-weight: 400; font-style: italic; letter-spacing: 0.3px;">
                     {{ $footerText }}
                 </p>
             </div>
@@ -64,8 +64,11 @@
                 </ul>
 
                 <div class="d-flex gap-3">
-                    <a href="#" class="rs-icon-footer" style="color: {{ $vertLogo }};"><i class="ri-facebook-box-fill"></i></a>
-                    <a href="#" class="rs-icon-footer" style="color: {{ $vertLogo }};"><i class="ri-linkedin-box-fill"></i></a>
+                            {{-- LinkedIn --}}
+                            <a href="#" class="rs-icon-footer" style="color: {{ $vertLogo }}; font-size: 26px;"><i class="ri-linkedin-box-fill"></i></a>
+                            {{-- Facebook --}}
+                            <a href="#" class="rs-icon-footer" style="color: {{ $vertLogo }}; font-size: 26px;"><i class="ri-facebook-box-fill"></i></a>
+                            <a href="#" class="rs-icon-footer" style="color: {{ $vertLogo }}; font-size: 26px;"><i class="ri-instagram-fill"></i></a>
                 </div>
             </div>
 
