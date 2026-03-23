@@ -1,8 +1,8 @@
 <div class="top-header" style="background-color: #002e5b; color: #ffffff; padding: 8px 0; font-size: 13px;">
     <div class="container d-flex justify-content-between align-items-center">
         <div class="header-contact d-flex gap-4">
-           <span><i class="ri-phone-fill" style="color: #ffcc00;"></i> {{ $global_settings['phone'] ?? '+213 699 75 80 30' }}</span>
-<span><i class="ri-mail-fill" style="color: #ffcc00;"></i> {{ $global_settings['email'] ?? 'contact@qualiproplus.com' }}</span>
+           <<span><i class="ri-phone-fill" style="color: #ffcc00;"></i> {{ $global_settings['phone'] ?? '+213 699 75 80 30' }}</span>
+           <span><i class="ri-mail-fill" style="color: #ffcc00;"></i> {{ $global_settings['email'] ?? 'contact@qualiproplus.com' }}</span>ontact@qualiproplus.com' }}</span>
         </div>
         <div class="header-social d-flex gap-3 align-items-center">
             <span class="d-none d-md-inline opacity-75">Nous rejoindre :</span>

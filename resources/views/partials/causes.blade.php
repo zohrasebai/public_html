@@ -16,7 +16,7 @@
     </div>
     
     <div class="row"> 
-        @foreach($services as $item)
+        @foreach($coreItems as $item)
             <div class="col-12 col-md-6 col-lg-4">
                 <div class="service-4 p-30 mt-30 bg-white transition-5 shadow-sm hover:shadow-lg" 
                      style="min-height: 280px; border-radius: 12px; border-bottom: 4px solid #002e5b;">
