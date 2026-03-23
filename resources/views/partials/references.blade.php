@@ -1,5 +1,4 @@
 @php
-    // La liste de vos images telle qu'elle apparaît dans votre dossier 'paternes'
     $partners = [
         'partner1.jpg', 'partner2.png', 'partner3.jpg', 
         'partner4.jpg', 'partner5.jpg', 'partner6.png', 'partner7.png'
@@ -11,10 +10,15 @@
 
 <style>
     #section-references { background-color: #f4f7f6 !important; padding: 80px 0; }
+    
+    /* FORCE L'AFFICHAGE DES IMAGES */
+    .owl-carousel { display: block !important; opacity: 1 !important; visibility: visible !important; }
+    .owl-item { opacity: 1 !important; visibility: visible !important; }
+
     .partner-card {
         background: #fff;
         height: 130px;
-        display: flex;
+        display: flex !important; /* Force le centrage */
         align-items: center;
         justify-content: center;
         border-radius: 12px;
@@ -22,13 +26,15 @@
         margin: 10px;
         box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     }
+    
     .partner-card img {
-        max-width: 80% !important;
-        max-height: 70% !important;
-        width: auto !important;
-        object-fit: contain;
+        max-width: 85% !important;
+        max-height: 75% !important;
+        width: auto !important; /* Empêche l'image de disparaître ou de s'étirer */
+        display: block !important;
+        margin: 0 auto;
     }
-    /* Style des points sous le slider */
+
     .owl-dots { text-align: center; margin-top: 20px; display: block !important; }
     .owl-dot { height: 12px; width: 12px; background: #ccc !important; border-radius: 50%; display: inline-block; margin: 5px; border: none; }
     .owl-dot.active { background: #00aaff !important; }
@@ -70,31 +76,32 @@
 
 <script>
     $(document).ready(function() {
-        function activateSlider() {
-            var $slider = $('#slider-references');
-            if ($slider.length && typeof $.fn.owlCarousel !== 'undefined') {
-                $slider.owlCarousel({
-                    loop: true,
-                    margin: 10,
-                    autoplay: true,
-                    autoplayTimeout: 2500,
-                    autoplayHoverPause: true,
-                    smartSpeed: 1000,
-                    dots: true,
-                    nav: false,
-                    responsive: {
-                        0: { items: 1 },
-                        600: { items: 2 },
-                        1000: { items: 3 }
-                    }
-                });
-            }
+        var $owl = $('#slider-references');
+        
+        function initSlider() {
+            $owl.owlCarousel({
+                loop: true,
+                margin: 10,
+                autoplay: true,
+                autoplayTimeout: 2500,
+                smartSpeed: 1000,
+                dots: true,
+                nav: false,
+                responsive: {
+                    0: { items: 1 },
+                    600: { items: 2 },
+                    1000: { items: 3 }
+                }
+            });
         }
 
-        // Lancement immédiat
-        activateSlider();
+        initSlider();
         
-        // Sécurité : relancement après un court délai pour être sûr
-        setTimeout(activateSlider, 800);
+        // Relance après 500ms pour forcer l'affichage si le premier essai échoue
+        setTimeout(function(){
+            if (!$owl.hasClass('owl-loaded')) {
+                initSlider();
+            }
+        }, 500);
     });
 </script>
