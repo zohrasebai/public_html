@@ -5,10 +5,11 @@
     // ================================
 
     // 27 caractères (Max)
-    $partnersSubtitle = 'Ils Nous Font Confiance';
+    $partnersSubtitle = 'Clients qui nous font confiance…
+';
 
     // 24 caractères (Max)
-    $partnersTitle = 'Nos Partenaires & Clients';
+    $partnersTitle = 'Nos Références';
 
     // 200 caractères (Max)
     $partnersDesc = 'Nous collaborons avec des entreprises de divers secteurs (agroalimentaire, pharmaceutique, cosmétique) pour bâtir des démarches d’amélioration continue et garantir leur conformité aux normes.';
