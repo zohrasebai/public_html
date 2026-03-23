@@ -35,7 +35,7 @@
                 </li>
 
                 <li class="nav-item dropdown hover-dropdown">
-                    <a class="nav-link dropdown-toggle custom-link" href="#" id="aboutDropdown" role="button">
+                    <a class="nav-link dropdown-toggle custom-link" href="#about" id="aboutDropdown" role="button">
                         Qui nous sommes
                     </a>
                     <ul class="dropdown-menu shadow border-0" aria-labelledby="aboutDropdown">
