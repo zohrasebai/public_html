@@ -1,43 +1,51 @@
 @php
-    $partnersSubtitle = 'ILS NOUS FONT CONFIANCE...';
+    $partnersSubtitle = 'Clients qui nous font confiance...';
     $partnersTitle = 'Nos Références';
     $partnersDesc = 'Nous collaborons avec des entreprises de divers secteurs (agroalimentaire, pharmaceutique, cosmétique) pour bâtir des démarches d’amélioration continue et garantir leur conformité aux normes.';
+
+    // Liste précise selon votre capture d'écran (VS Code)
+    $partners = [
+        'partner1.jpg',
+        'partner2.png',
+        'partner3.jpg',
+        'partner4.jpg',
+        'partner5.jpg',
+        'partner6.png',
+        'partner7.png'
+    ];
 @endphp
 
-<section id="references" class="py-80" style="background-color: #f4f7f6;"> {{-- Gris clair uni --}}
+<section id="references" class="py-80" style="background-color: #f4f7f6;"> {{-- Le même gris que demandé --}}
     <div class="container">
         <div class="row align-items-center">
             
             <div class="col-lg-5 col-md-12">
-                <div class="title mb-30 wow animated fadeInLeft">
+                <div class="title mb-30 wow animated slideInLeft">
                     <span style="color: #006a4e; font-weight: 700; text-transform: uppercase; font-size: 13px; letter-spacing: 1px;">
                         {{ $partnersSubtitle }}
                     </span>
                     <h2 class="fw-bold mb-2" style="color: #002e5b; font-size: 34px;">
                         {{ $partnersTitle }}
                     </h2>
-                    <div style="width: 60px; height: 3px; background-color: #00aaff; margin-bottom: 20px;"></div>
-                    <p class="text-muted" style="font-size: 16px; line-height: 1.7; max-width: 420px;">
+                    <div style="width: 50px; height: 3px; background-color: #00aaff; margin-bottom: 20px;"></div>
+                    <p class="text-muted" style="font-size: 15px; line-height: 1.7;">
                         {{ $partnersDesc }}
                     </p>
                 </div>
             </div>
 
             <div class="col-lg-7 col-md-12">
-                <div class="owl-carousel owl-theme partner-carousel wow animated fadeInRight">
-                    {{-- Boucle automatique pour partner1.png jusqu'à partner7.png --}}
-                    @for ($i = 1; $i <= 7; $i++)
+                <div class="owl-carousel owl-theme partner-carousel">
+                    @foreach($partners as $file)
                         <div class="item">
                             <div class="d-flex align-items-center justify-content-center bg-white shadow-sm" 
-                                 style="height: 130px; margin: 10px; border-radius: 12px; border: 1px solid #eee; transition: 0.4s; overflow: hidden;">
-                                <img src="{{ asset('assets/images/partners/partner' . $i . '.png') }}" 
-                                     alt="Partenaire QualiPro+ {{ $i }}" 
-                                     style="max-width: 85%; max-height: 75%; object-fit: contain; filter: grayscale(100%); opacity: 0.6; transition: 0.4s;"
-                                     onmouseover="this.style.filter='grayscale(0%)'; this.style.opacity='1'"
-                                     onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.6'">
+                                 style="height: 120px; margin: 10px; border-radius: 8px; border: 1px solid #eee;">
+                                <img src="{{ asset('assets/images/partners/' . $file) }}" 
+                                     alt="Client QualiPro+" 
+                                     style="max-width: 85%; max-height: 70%; object-fit: contain;">
                             </div>
                         </div>
-                    @endfor
+                    @endforeach
                 </div>
             </div>
 
@@ -50,17 +58,16 @@
     $(document).ready(function(){
         $(".partner-carousel").owlCarousel({
             loop: true,
-            margin: 15,
+            margin: 10,
             nav: false,
-            dots: true,
+            dots: true, {{-- Les petits points en bas comme sur wer.png --}}
             autoplay: true,
-            autoplayTimeout: 3000, {{-- Temps d'arrêt sur chaque logo --}}
-            smartSpeed: 1200,      {{-- Vitesse du glissement fluide --}}
-            autoplayHoverPause: true,
+            autoplayTimeout: 2000,
+            smartSpeed: 800,
             responsive: {
-                0: { items: 1 },    {{-- Mobile --}}
-                768: { items: 2 },  {{-- Tablette --}}
-                1024: { items: 3 }  {{-- PC : Exactement 3 logos --}}
+                0: { items: 1 },
+                600: { items: 2 },
+                1000: { items: 3 } {{-- 3 logos côte à côte sur PC --}}
             }
         });
     });
