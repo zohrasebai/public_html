@@ -21,7 +21,7 @@
     </div>
 </div>
 
-<nav class="navbar navbar-expand-lg bg-white sticky-top shadow-sm" style="padding: 11px 0;">
+<nav class="navbar navbar-expand-lg bg-white sticky-top shadow-sm" style="padding: 11px 0; position: sticky; top: 0; z-index: 1050;">
     <div class="container">
         <a class="navbar-brand" href="/">
             <img src="{{ asset('assets/images/logo/logo.png') }}" alt="QualiPro+" style="height: 70px;">
@@ -39,10 +39,10 @@
                         Qui nous sommes
                     </a>
                     <ul class="dropdown-menu shadow border-0" aria-labelledby="aboutDropdown">
-                        <li><a class="dropdown-item" href="#mission">Notre Mission</a></li>
-                        <li><a class="dropdown-item" href="#valeurs">Nos Valeurs</a></li>
+                        <li><a class="dropdown-item sub-link" href="#mission">Notre Mission</a></li>
+                        <li><a class="dropdown-item sub-link" href="#valeurs">Nos Valeurs</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#equipe">Notre Équipe</a></li>
+                        <li><a class="dropdown-item sub-link" href="#equipe">Notre Équipe</a></li>
                     </ul>
                 </li>
 
@@ -51,9 +51,9 @@
                         Nos Services
                     </a>
                     <ul class="dropdown-menu shadow border-0" aria-labelledby="servicesDropdown">
-                        <li><a class="dropdown-item" href="#accompagnement">Accompagnement</a></li>
-                        <li><a class="dropdown-item" href="#formation">Formation</a></li>
-                        <li><a class="dropdown-item" href="#audit">Audit</a></li>
+                        <li><a class="dropdown-item sub-link" href="#accompagnement">Accompagnement</a></li>
+                        <li><a class="dropdown-item sub-link" href="#formation">Formation</a></li>
+                        <li><a class="dropdown-item sub-link" href="#audit">Audit</a></li>
                     </ul>
                 </li>
 
@@ -66,40 +66,40 @@
 </nav>
 
 <style>
-    /* TITRES EN VERT PAR DÉFAUT */
+    /* TITRES NAVBAR : VERT -> BLEU CLAIR */
     .custom-link {
         color: #006a4e !important;
         font-weight: 700 !important;
         transition: all 0.3s ease;
     }
-
-    /* COULEUR BLEU CLAIR AU SURVOL (TOUCHER) */
-    .custom-link:hover, 
-    .hover-dropdown:hover .custom-link {
+    .custom-link:hover, .hover-dropdown:hover .custom-link {
         color: #00aaff !important;
     }
 
-    /* STYLE DES SOUS-TITRES (Menu Déroulant) */
-    .dropdown-item {
-        color: #006a4e !important; /* Vert */
+    /* SOUS-TITRES DROPDOWN : VERT -> ROUGE */
+    .sub-link {
+        color: #006a4e !important; /* Vert par défaut */
         text-transform: none;
         font-weight: 600;
         padding: 10px 20px;
-        transition: 0.3s;
+        transition: 0.3s ease;
     }
-
-    .dropdown-item:hover {
-        background-color: #f4f7f6;
-        color: #00aaff !important; /* Bleu clair au survol */
+    .sub-link:hover, .sub-link:active, .sub-link:focus {
+        color: #dd3513 !important; /* Rouge au clic/survol */
+        background-color: #fdf2f2; /* Fond rouge très léger */
         padding-left: 25px;
     }
 
-    /* OUVERTURE AUTOMATIQUE AU SURVOL (Desktop) */
+    /* DESIGN DU MENU DROPDOWN */
     @media (min-width: 992px) {
         .hover-dropdown:hover .dropdown-menu {
             display: block;
             margin-top: 0;
-            border-top: 3px solid #00aaff; /* Ligne bleu clair en haut du menu */
+            border-top: 3px solid #dd3513; /* Ligne rouge en haut du menu */
         }
+    }
+    
+    .dropdown-menu {
+        border-radius: 0 0 8px 8px;
     }
 </style>
