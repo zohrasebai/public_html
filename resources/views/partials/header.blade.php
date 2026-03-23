@@ -7,7 +7,7 @@
                 <i class="ri-phone-fill" style="color: #006a4e; margin-right: 10 px; margin-left: 8px; font-size: 16px;margin-left: 8px;">  </i> 
                 {{ $global_settings['phone'] ?? ' +213 699 75 80 30 / +213 776 70 75 80    ' }}
             </span>
-            <span style="font-weight: 700;">
+            <span style="font-weight: 650;">
                 <i class="ri-mail-fill" style="color: #006a4e; margin-right: 10 px; font-size: 16px;margin-left: 8px;">   </i> 
                 {{ $global_settings['email'] ?? ' qualiproplus16@gmail.com' }}
             </span>
