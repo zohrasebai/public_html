@@ -7,8 +7,7 @@
     $aboutTitle = $aboutData->title_fr ?? 'Plus qu’un cabinet, nous sommes votre partenaire pour l’excellence.'; 
     $aboutText1 = $aboutData->text_1_fr ?? 'Nous sommes un cabinet spécialisé dans l’accompagnement des entreprises pour l’obtention de certifications...';
     $aboutText2 = $aboutData->text_2_fr ?? 'Notre mission : Accompagner les entreprises vers la certification...';
-    $aboutReadMoreUrl = $aboutData->button_url ?? 'contact';
-    $aboutReadMoreText = $aboutData->button_text_fr ?? 'Demander Devis';
+  
 @endphp
 <section id="about" class="about-us-3 position-relative bg-light">
     <div class="container">
@@ -29,8 +28,6 @@
                     </div>
                     <div class="about-area-2 bg-secondery d-flex color-white p-40 wow animated slideInUp animated">
                         <p>{{ $aboutText2 }}</p>
-                    </div>
-                    <a class="btn btn-primary mt-30" href="{{ $aboutReadMoreUrl }}">{{ $aboutReadMoreText }}</a>
                 </div>
             </div>
         </div>

@@ -1,89 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <!-- Meta -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- Title -->
-    <title>@yield('title', 'qualipro')</title>
+    <title>@yield('title', 'QualiPro+')</title>
 
-    <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/images/favicon.ico') }}">
 
-    <!-- CSS Files -->
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/layerslider.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/animate.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/color.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/default-animation.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/jquery.fancybox.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/css/owl.carousel.min.css') }}">
+    
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    
     <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/fonts/flaticon/flaticon.css') }}">
 
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Force le style du menu en Vert Foncé QualiPro */
+        .navbar-nav .nav-link {
+            color: #004d40 !important;
+            font-weight: 800 !important;
+            transition: 0.3s;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #ffcc00 !important; /* Jaune au survol */
+        }
+    </style>
 
     @stack('styles')
 </head>
 
 <body>
 
-    <!-- Page Content -->
     @yield('content')
 
-    <!-- JS Scripts -->
     <script src="{{ asset('assets/js/jquery-v3.4.1.js') }}"></script>
-    <script src="{{ asset('assets/js/greensock.js') }}"></script>
-    <script src="{{ asset('assets/js/layerslider.transitions.js') }}"></script>
-    <script src="{{ asset('assets/js/layerslider.kreaturamedia.jquery.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets/js/isotope.pkgd.min.js') }}"></script>
-    <script src="{{ asset('assets/js/imagesloaded.pkgd.min.js') }}"></script>
     <script src="{{ asset('assets/js/wow.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.fancybox.min.js') }}"></script>
-    <script src="{{ asset('assets/js/jquery.mb.YTPlayer.js') }}"></script>
-    <script src="{{ asset('assets/js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
 
-    <!-- Slider Initialization -->
     <script>
         $(document).ready(function() {
-            $('#slider').layerSlider({
-                createdWith: '6.6.7',
-                sliderVersion: '6.6.5',
-                startInViewport: false,
-                pauseOnHover: 'disabled',
-                keybNav: false,
-                touchNav: false,
-                skin: 'v6',
-                globalBGColor: '#e9ebee',
-                globalBGPosition: '50% 100%',
-                navPrevNext: false,
-                hoverPrevNext: false,
-                navStartStop: false,
-                navButtons: false,
-                showCircleTimer: false,
-                skinsPath: "{{ asset('assets/images/skins/') }}"
-            });
-        });
-    </script>
-
-    <!-- Smooth Scroll -->
-    <script>
-        $(".nav-link").on('click', function(event) {
-            if (this.hash !== "") {
-                event.preventDefault();
-                var hash = this.hash;
-
-                $('html, body').animate({
-                    scrollTop: $(hash).offset().top
-                }, 1000);
+            // S'assure que la vidéo démarre bien
+            const video = document.querySelector('video');
+            if (video) {
+                video.play().catch(error => console.log("Lecture auto bloquée par le navigateur"));
             }
+
+            // Smooth Scroll pour la navigation
+            $(".nav-link").on('click', function(event) {
+                if (this.hash !== "") {
+                    event.preventDefault();
+                    var hash = this.hash;
+                    $('html, body').animate({
+                        scrollTop: $(hash).offset().top - 70 // -70 pour ne pas cacher le haut de section
+                    }, 800);
+                }
+            });
         });
     </script>
 
