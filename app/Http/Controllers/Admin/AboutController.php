@@ -6,6 +6,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\About;
 use App\Models\Slider;
+use App\Models\CoreValue;
+use App\Models\CoreValueItem;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
