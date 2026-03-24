@@ -13,11 +13,16 @@ class AboutController extends Controller
 {
     // عرض الصفحة (تجمع السلايدر ومن نحن)
     public function index()
-    {
-        $sliders = Slider::orderBy('order')->get();
-        $about = About::first() ?? new About(); // إذا كان الجدول فارغاً، أنشئ كائناً مؤقتاً
-        return view('admin.about.index', compact('sliders', 'about'));
-    }
+{
+    $sliders = \App\Models\Slider::orderBy('order')->get();
+    $aboutData = \App\Models\About::first(); // On récupère "Qui sommes-nous"
+
+    // AJOUTEZ CES DEUX LIGNES ICI
+    $coreSettings = \App\Models\CoreValue::first(); // On récupère les réglages des valeurs
+    $coreItems = \App\Models\CoreValueItem::all();  // On récupère les 4 cartes
+
+    return view('admin.about.index', compact('sliders', 'aboutData', 'coreSettings', 'coreItems'));
+}
 
     // تحديث البيانات
     public function update(Request $request)
