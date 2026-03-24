@@ -30,8 +30,7 @@
                     <div class="about-area-2 bg-secondery d-flex color-white p-30 wow animated slideInUp">
                         <p class="mb-0">{{ $aboutText2 }}</p>
                     </div>
-                    {{-- Bouton Demander Devis rétabli pour correspondre à exm.png --}}
-                    <a class="btn btn-primary mt-30" href="contact">Demander Devis</a>
+            
                 </div>
             </div>
         </div>
@@ -45,7 +44,7 @@
             {{-- Titre centré en haut --}}
             <div class="col-md-12 text-center mb-50">
                 <div class="title wow animated slideInUp">
-                    <span class="color-primary d-block mb-10">{{ $coreSettings->subtitle_fr ?? 'Sous-titre' }}</span>
+                    <span class="color-primary d-block mb-10">{{ $coreSettings->subtitle_fr ?? 'Pour quoi nous' }}</span>
                     <h2 class="position-relative va-c-line-w50-h1-primary pb-15 mb-20">{{ $coreSettings->title_fr ?? 'Nos Valeurs' }}</h2>
                     <p>{{ $coreSettings->desc_fr ?? 'Excellence et Intégrité.' }}</p>
                 </div>
