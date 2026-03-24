@@ -39,7 +39,6 @@
                         Qui nous sommes
                     </a>
                     <ul class="dropdown-menu shadow border-0" aria-labelledby="aboutDropdown">
-                        <li><a class="dropdown-item sub-link" href="#mission">Notre Mission</a></li>
                         <li><a class="dropdown-item sub-link" href="#valeurs">Nos Valeurs</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item sub-link" href="#equipe">Notre Équipe</a></li>
@@ -47,7 +46,7 @@
                 </li>
 
                 <li class="nav-item dropdown hover-dropdown">
-                    <a class="nav-link dropdown-toggle custom-link" href="#" id="servicesDropdown" role="button">
+                    <a class="nav-link dropdown-toggle custom-link" href="#causes" id="servicesDropdown" role="button">
                         Nos Services
                     </a>
                     <ul class="dropdown-menu shadow border-0" aria-labelledby="servicesDropdown">
