@@ -49,10 +49,15 @@
                     <a class="nav-link dropdown-toggle custom-link" href="#causes" id="servicesDropdown" role="button">
                         Nos Services
                     </a>
-                    <ul class="dropdown-menu shadow border-0" aria-labelledby="servicesDropdown">
-                        <li><a class="dropdown-item sub-link" href="#accompagnement">Accompagnement</a></li>
-                        <li><a class="dropdown-item sub-link" href="#formation">Formation</a></li>
-                        <li><a class="dropdown-item sub-link" href="#audit">Audit</a></li>
+                    <ul class="dropdown-menu">
+                     {{-- Lien direct vers le bloc Accompagnement --}}
+                        <li><a class="dropdown-item" href="#accompagnement">Accompagnement</a></li>
+        
+                     {{-- Lien direct vers le bloc Audit --}}
+                      <li><a class="dropdown-item" href="#audit">Audit</a></li>
+        
+                     {{-- Lien direct vers le bloc Formation --}}
+                        <li><a class="dropdown-item" href="#formation">Formation</a></li>
                     </ul>
                 </li>
 
