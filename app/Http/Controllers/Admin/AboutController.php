@@ -20,7 +20,7 @@ class AboutController extends Controller
     // AJOUTEZ CES DEUX LIGNES ICI
     $coreSettings = \App\Models\CoreValue::first(); // On récupère les réglages des valeurs
     $coreItems = \App\Models\CoreValueItem::all();  // On récupère les 4 cartes
-    return view('admin.about.index', compact('sliders', 'aboutData', 'coreSettings', 'coreItems'));
+  return view('admin.about.index', compact('sliders', 'about', 'coreSettings', 'coreItems'));
 }
 
     // تحديث البيانات
