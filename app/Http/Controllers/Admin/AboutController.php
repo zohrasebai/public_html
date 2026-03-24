@@ -14,15 +14,20 @@ use Illuminate\Support\Facades\File;
 class AboutController extends Controller
 {
     // عرض الصفحة (تجمع السلايدر ومن نحن)
-    public function index()
+   public function index()
 {
+    // 1. Récupérer les sliders
     $sliders = \App\Models\Slider::orderBy('order')->get();
-    $aboutData = \App\Models\About::first(); // On récupère "Qui sommes-nous"
+    
+    // 2. Récupérer "Qui sommes-nous" (On utilise $about pour correspondre à la vue et au compact)
+    $about = \App\Models\About::first() ?? new \App\Models\About(); 
 
-    // AJOUTEZ CES DEUX LIGNES ICI
-    $coreSettings = \App\Models\CoreValue::first(); // On récupère les réglages des valeurs
-    $coreItems = \App\Models\CoreValueItem::all();  // On récupère les 4 cartes
-  return view('admin.about.index', compact('sliders', 'about', 'coreSettings', 'coreItems'));
+    // 3. Récupérer les réglages des valeurs et les items
+    $coreSettings = \App\Models\CoreValue::first() ?? new \App\Models\CoreValue();
+    $coreItems = \App\Models\CoreValueItem::all();
+
+    // On envoie bien 'about' ici
+    return view('admin.about.index', compact('sliders', 'about', 'coreSettings', 'coreItems'));
 }
 
     // تحديث البيانات
