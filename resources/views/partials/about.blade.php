@@ -1,35 +1,39 @@
+{{-- Supprime tout bloc @php manuel ici, le contrôleur s'en occupe --}}
 
-{{-- ================= SECTION 1 : QUI SOMMES-NOUS (Image à Gauche / Texte à Droite) ================= --}}
+{{-- ================= SECTION 1 : QUI SOMMES-NOUS ================= --}}
 <section id="about" class="about-us-3 position-relative bg-light py-5">
     <div class="container">
         <div class="row align-items-center">
-            {{-- Image à gauche comme dans exm.png --}}
+            {{-- Image à gauche --}}
             <div class="col-md-12 col-lg-12 col-xl-5">
                 <div class="about-img-2 wow animated slideInLeft">
-                    <img src="{{ filter_var($aboutImg, FILTER_VALIDATE_URL) ? $aboutImg : asset($aboutImg) }}" alt="Qui Sommes Nous">
+                    {{-- Sécurité : si l'image est vide, on met un placeholder --}}
+                    <img src="{{ ($about && $about->image) ? asset($about->image) : 'https://via.placeholder.com/500x400' }}" alt="Qui Sommes Nous" class="img-fluid">
                 </div>
             </div>
+
             {{-- Texte à droite --}}
             <div class="col-md-12 col-lg-12 col-xl-7">
                 <div class="position-relative ps-xl-4">
                     <div class="inner-title mb-20">
-                        <h2 class="color-secondery wow animated slideInUp">{{ $aboutTitle }}</h2>
+                        {{-- On utilise directement l'objet $about envoyé par le contrôleur --}}
+                        <h2 class="color-secondery wow animated slideInUp">{{ $about->title_fr ?? 'Qui Sommes-Nous' }}</h2>
                     </div>
                     <div class="text-area mb-20 wow animated slideInUp">
-                        <p>{{ $aboutText1 }}</p>
+                        <p>{{ $about->text_1_fr ?? '' }}</p>
                     </div>
-                    <div class="about-area-2 bg-secondery d-flex color-white p-30 wow animated slideInUp">
-                        <p class="mb-0">{{ $aboutText2 }}</p>
+                    <div class="about-area-2 bg-secondery d-flex color-white p-30 wow animated slideInUp" style="background-color: #002e5b !important;">
+                        <p class="mb-0">{{ $about->text_2_fr ?? '' }}</p>
                     </div>
-            
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-{{-- ================= SECTION 2 : NOS VALEURS (Texte en Haut / Cartes à Gauche / Image à Droite) ================= --}}
+{{-- ================= SECTION 2 : NOS VALEURS ================= --}}
 @include('partials.core')
+
 {{-- ================= SECTION 3 : NOTRE ÉQUIPE ================= --}}
 <section id="equipe" class="py-5 bg-light border-top">
     <div class="container text-center">
