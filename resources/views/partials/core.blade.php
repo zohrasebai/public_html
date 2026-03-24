@@ -1,39 +1,41 @@
-<section class="core-value position-relative py-5">
+<section class="core-values-section py-5 bg-light">
     <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="title mb-30 w-75 text-center mx-auto wow animated slideInUp">
-                    <span class="color-primary">{{ $coreSettings->subtitle_fr ?? '' }}</span>
-                    <h2 class="position-relative va-c-line-w50-h1-primary pb-15 mb-20">{{ $coreSettings->title_fr ?? '' }}</h2>
-                    <p>{{ $coreSettings->desc_fr ?? '' }}</p>
-                </div>
-            </div>
+        {{-- En-tête --}}
+        <div class="text-center mb-5">
+            <span class="text-uppercase fw-bold" style="color: #269649; letter-spacing: 2px;">{{ $coreSettings->subtitle_fr ?? 'Valeurs' }}</span>
+            <h2 class="fw-bold mt-2" style="color: #002e5b;">{{ $coreSettings->title_fr ?? 'Nos Valeurs Fondamentales' }}</h2>
+            <p class="text-muted mx-auto w-75">{{ $coreSettings->desc_fr ?? '' }}</p>
+        </div>
 
-            {{-- Cartes à gauche --}}
-            <div class="col-xl-7 col-lg-12">
-                {{-- J'ai enlevé le -80px qui causait le bug --}}
-                <div class="core-value-box bg-secondery p-30 z-index-1 position-relative shadow-sm" style="border-radius: 8px;">
-                    <div class="row">
-                        @if(isset($coreItems))
-                            @foreach($coreItems as $i => $item)
-                            <div class="col-md-6">
-                                <div class="Valuable-item bg-light p-30 text-center h-100 mb-3 wow animated slideInUp" style="visibility: visible;">
-                                    <h4 class="mb-15" style="color: #002e5b;">{{ $item->title_fr }}</h4>
-                                    <p class="mb-0">{{ $item->desc_fr }}</p>
-                                </div>
+        {{-- Le Bloc Combiné (Cartes + Image) --}}
+        <div class="row g-0 shadow-lg" style="border-radius: 15px; overflow: hidden;">
+            
+            {{-- Partie Gauche : Fond Bleu + Cartes Blanches --}}
+            <div class="col-xl-7 col-lg-7" style="background-color: #002e5b; padding: 50px;">
+                <div class="row g-4">
+                    @if(isset($coreItems) && $coreItems->count() > 0)
+                        @foreach($coreItems as $item)
+                        <div class="col-md-6">
+                            <div class="bg-white p-4 h-100 text-center shadow-sm" style="border-radius: 12px; border-bottom: 4px solid #269649;">
+                                <h5 class="fw-bold mb-3" style="color: #002e5b;">{{ $item->title_fr }}</h5>
+                                <p class="small text-muted mb-0" style="line-height: 1.5;">{{ $item->desc_fr }}</p>
                             </div>
-                            @endforeach
-                        @endif
-                    </div>
+                        </div>
+                        @endforeach
+                    @else
+                        <p class="text-white text-center">Aucune valeur configurée.</p>
+                    @endif
                 </div>
             </div>
 
-            {{-- Image à droite --}}
-            <div class="col-xl-5 col-lg-12">
-                <div class="core-images mt-30 wow animated slideInRight" style="visibility: visible;">
-                    <img src="{{ ($coreSettings && $coreSettings->image) ? asset($coreSettings->image) : 'https://cdn.bcs-express.ru/article-head/7180.jpg' }}" alt="QualiPro" class="img-fluid rounded shadow">
+            {{-- Partie Droite : Image --}}
+            <div class="col-xl-5 col-lg-5 d-none d-lg-block">
+                <div class="h-100">
+                    <img src="{{ ($coreSettings && $coreSettings->image) ? asset($coreSettings->image) : 'https://via.placeholder.com/600x800' }}" 
+                         alt="QualiPro Values" class="w-100 h-100" style="object-fit: cover; min-height: 450px;">
                 </div>
             </div>
+
         </div>
     </div>
 </section>
