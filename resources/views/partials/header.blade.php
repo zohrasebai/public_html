@@ -46,19 +46,12 @@
                 </li>
 
                 <li class="nav-item dropdown hover-dropdown">
-                    <a class="nav-link dropdown-toggle custom-link" href="#causes" id="servicesDropdown" role="button">
-                        Nos Services
-                    </a>
-                    <ul class="dropdown-menu">
-                     {{-- Lien direct vers le bloc Accompagnement --}}
-                        <li><a class="dropdown-item" href="#accompagnement">Accompagnement</a></li>
-        
-                     {{-- Lien direct vers le bloc Audit --}}
+                    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Nos Services</a>
+                   <ul class="dropdown-menu border-0 shadow">
+                      <li><a class="dropdown-item" href="#accompagnement">Accompagnement</a></li>
                       <li><a class="dropdown-item" href="#audit">Audit</a></li>
-        
-                     {{-- Lien direct vers le bloc Formation --}}
-                        <li><a class="dropdown-item" href="#formation">Formation</a></li>
-                    </ul>
+                      <li><a class="dropdown-item" href="#formation">Formation</a></li>
+                   </ul>
                 </li>
 
                 <li class="nav-item">
