@@ -1,6 +1,6 @@
 @php
     // ================================
-    //    VARIABLES DU FOOTER
+    //    
     //  (Mise à jour Finale QualiPro Plus)
     // ================================
 
