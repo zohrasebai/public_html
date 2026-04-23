@@ -1,6 +1,3 @@
-@php
-    $services = \App\Models\Service::orderBy('order', 'asc')->get();
-@endphp
 
 <section id="causes" class="bg-light py-5">
     <div class="container">

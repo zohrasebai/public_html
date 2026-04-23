@@ -1,22 +1,41 @@
 @php
-    // On récupère les sliders depuis la BDD
+    // Récupération des sliders actifs
     $activeSliders = \App\Models\Slider::orderBy('order', 'asc')->get();
     
-    // On récupère le chemin de la vidéo depuis la BDD
-    $videoPath = asset($video->video_file);
-@endphp
+    // Chemin vidéo depuis la BDD
+    $videoPath = asset($video->video_file ?? 'assets/videos/vd.mp4');
+
+    // Images fallbacks (Déjà présentes)
+    $k1 = asset('assets/images/slider/k1.png');
+    $k2 = `assets/images/slider/k2.png`;
+    $k3 = `assets/images/slider/k3.png`;
+    $f1 = `assets/images/slider/f1.png`;
+    @endphp
 
 <style>
     /* --- STYLE HERO SECTION --- */
-   body {
-    margin: 0 !important;
-    padding-top: 0 !important;
-}
+    .hero-section {
+        min-height:  <span class="color-primary">{{ $coreSettings->subtitle_fr ?? 'Expertise en Certification' }}</span>
+        <h1>Votre partenaire expert en <span class="color-primary">Performance</span> & Certification</h1>
+        <p class="mb-30">
+            {{ $coreSettings->desc_fr ?? 'Nous transformons vos ambitions en résultats durables grâce à des solutions sur-mesure et rigoureuses.' }}
+        </p>
 
-.hero-section {
-    margin-top: 0 !important;
-    padding-top: 1 !important;
-}
+        <div class="d-flex gap-3">
+            <a href="#about" class="hero-btn">Découvrir nos services</a>
+            <a href="#partners" class="btn btn-outline-secondary px-4 py-2" style="border-radius:5px;">
+                Nos Partenaires
+            </a>
+        </div>
+    </div>
+
+    <style>
+    .hero-section {
+        min-height: 600px;
+        background-color: #f8f9fa; 
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
     
     .hero-text h1 {
         color: #1c2c52; /* Bleu Marine */
@@ -67,7 +86,7 @@
         outline: none;
     }
 
-    /* --- STYLE DES BOUTONS (Commun) --- */
+    /* --- STYLE DES BOUTONS --- */
     .video-btn {
         position: absolute;
         bottom: 20px;
@@ -91,7 +110,6 @@
         transform: scale(1.1);
     }
 
-    /* Positionnement des boutons */
     .btn-play-pause {
         right: 20px; /* À droite */
     }
@@ -101,7 +119,7 @@
     }
 </style>
 
-<!-- SECTION HERO -->
+<!-- SECTION HERO DIVISÉE -->
 <section class="hero-section d-flex align-items-center">
     <div class="container">
         <div class="row align-items-center">
@@ -109,16 +127,19 @@
             <!-- COLONNE GAUCHE : TEXTE -->
             <div class="col-lg-6 mb-5 mb-lg-0 hero-text">
                 <span class="badge badge-pill px-3 py-2 mb-3" style="background:#e6f7ff; color:#176363; font-size:0.9rem;">
-                    Accompagnement  & Conseil
+                    EXPERT CERTIFICATION & AUDIT
                 </span>
+                <h1>Votre partenaire expert en <span class="highlight">Performance</span> & Certification</h1>
                 
-                <h1>Votre partenaire vers <span class="highlight">LA CERTIFICATION</span></h1>
-                
-                <p>Accompagnement, Formation et Audit. Nous transformons les ambitions de votre entreprise en résultats durables.</p>
+                <p>
+                    Accompagnement, Formation et Diagnostic. Nous transformons les ambitions de votre entreprise en résultats durables grâce à des solutions sur-mesure et rigoureuses.
+                </p>
                 
                 <div class="d-flex gap-3">
-                    <a href="#causes" class="hero-btn">Découvrir nos services</a>
-                   
+                    <a href="#about" class="hero-btn">Découvrir nos services</a>
+                    <a href="#partners" class="btn btn-outline-secondary px-4 py-2" style="border-radius:5px;">
+                        Nos Partenaires
+                    </a>
                 </div>
             </div>
 
@@ -137,13 +158,12 @@
                         Votre navigateur ne supporte pas la vidéo.
                     </video>
 
-                    <!-- BOUTON DE CONTRÔLE -->
-                    <!-- Bouton Play / Pause -->
+                    <!-- BOUTON 1 : PLAY / PAUSE -->
                     <button class="video-btn btn-play-pause" onclick="toggleHeroVideo()">
                         <i id="videoIcon" class="fa fa-pause" aria-hidden="true"></i>
                     </button>
 
-                    <!-- Bouton Son -->
+                    <!-- BOUTON 2 : SON -->
                     <button class="video-btn btn-sound" onclick="toggleHeroSound()">
                         <i id="soundIcon" class="fa fa-volume-up" aria-hidden="true"></i>
                     </button>
@@ -154,7 +174,7 @@
     </div>
 </section>
 
-<!-- SCRIPTS POUR LES BOUTONS -->
+<!-- JAVASCRIPTS POUR LES BOUTONS -->
 <script>
     // 1. Gérer le Play / Pause
     function toggleHeroVideo() {
@@ -172,7 +192,7 @@
         }
     }
 
-    // 2. Gérer le Son
+    // 2. Gérer le Son (Icônes FontAwesome 4)
     function toggleHeroSound() {
         var video = document.getElementById('heroVideo');
         var icon = document.getElementById('soundIcon');

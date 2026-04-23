@@ -1,46 +1,26 @@
-paterns.blade.php:@php
-    // ================================
-    //    VARIABLES DE LA SECTION PARTENAIRES
-    // ================================
-
+@php
+    // On utilise les variables envoyées par le contrôleur ou des valeurs par défaut
     $partnersSubtitle = 'Ils Nous Font Confiance';
     $partnersTitle = 'Nos Partenaires & Clients';
-    $partnersDesc = 'Nous collaborons avec des entreprises de divers secteurs (agroalimentaire, pharmaceutique, cosmétique) pour bâtir des démarches d’amélioration continue et garantir leur conformité aux normes.';
-
-    // LE CODE MAGIQUE : On scanne directement le dossier pour trouver les images
-    $directoryPath = public_path('assets/images/partners');
-    $partnerImages = [];
-    
-    if (file_exists($directoryPath)) {
-        // On récupère tous les fichiers .jpg, .jpeg, .png et .webp du dossier
-        $partnerImages = glob($directoryPath . '/*.{jpg,jpeg,png,webp,PNG,JPG}', GLOB_BRACE);
-    }
+    $partnersDesc = 'Nous collaborons avec des entreprises de divers secteurs...';
 @endphp
 
 <style>
-    /* 1. On supprime le texte 1920x400 du template */
-    .our-partners-two::before, 
-    .our-partners-two::after {
-        background-image: none !important;
-        content: none !important;
-    }
-    
-    /* 2. On applique ton fond gris uni */
-    .our-partners-two {
-        background-image: none !important;
-        
-    }
-
-    /* 3. On harmonise la taille des logos */
+    .our-partners-two { background-color: #f8f9fa; }
     .our-partners-two .item img {
         max-height: 70px; 
         width: auto; 
         object-fit: contain;
         display: inline-block !important;
+        filter: grayscale(100%); /* Effet stylé noir et blanc */
+        transition: 0.3s;
+    }
+    .our-partners-two .item img:hover {
+        filter: grayscale(0%);
     }
 </style>
-<section id="partners"
-<div class="our-partners-two position-relative py-80">
+
+<section id="partners" class="our-partners-two position-relative py-80">
     <div class="container">
         <div class="row align-items-center">
             
@@ -53,24 +33,18 @@ paterns.blade.php:@php
                 </div>
             </div>
 
-            {{-- BLOC DROIT : LE CARROUSEL DE LOGOS --}}
+            {{-- BLOC DROIT : CARROUSEL (DYNAMIQUE) --}}
             <div class="col-md-12 col-lg-7">
                 <div class="owl-carousel partners-slider wow animated slideInRight">
                     
-                    @forelse($partnerImages as $path)
-                        @php
-                            // On extrait juste le nom du fichier
-                            $filename = basename($path);
-                            $finalSrc = asset('assets/images/partners/' . $filename);
-                        @endphp
-                        
+                    @forelse($partners as $partner)
                         <div class="item text-center p-20">
-                            <img src="{{ $finalSrc }}" alt="Partenaire">
+                            {{-- On suppose que la table 'partners' a une colonne 'image' ou 'logo' --}}
+                            <img src="{{ asset($partner->image) }}" alt="{{ $partner->name ?? 'Partenaire' }}">
                         </div>
                     @empty
-                        {{-- Message de secours si le dossier est vide --}}
                         <div class="item text-center">
-                            <p class="text-muted">Aucun logo trouvé dans assets/images/partners/</p>
+                            <p class="text-muted">Aucun partenaire ajouté via l'admin.</p>
                         </div>
                     @endforelse
 
@@ -79,9 +53,9 @@ paterns.blade.php:@php
             
         </div>
     </div>
-</div>
 </section>
-{{-- Script d'activation du Owl Carousel --}}
+
+@push('scripts')
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     if (typeof jQuery !== 'undefined' && jQuery().owlCarousel) {
@@ -90,7 +64,6 @@ document.addEventListener("DOMContentLoaded", function() {
             margin: 30,
             autoplay: true,
             autoplayTimeout: 2000, 
-            autoplaySpeed: 1000,
             nav: false,
             dots: false,
             responsive: {
@@ -102,3 +75,4 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 </script>
+@endpush

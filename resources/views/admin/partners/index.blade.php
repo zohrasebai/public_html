@@ -3,75 +3,96 @@
 @section('content')
 <div class="page-header">
     <h3 class="page-title">
-        <span class="page-title-icon bg-gradient-primary text-white mr-2">
+        <span class="page-title-icon bg-gradient-info text-white mr-2">
             <i class="mdi mdi-handshake"></i>
         </span> Gestion des Partenaires
     </h3>
 </div>
 
 <div class="row">
+    <!-- Formulaire d'ajout -->
     <div class="col-md-4 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Nouveau Partenaire</h4>
+                <h4 class="card-title">Ajouter un Partenaire</h4>
+                <p class="card-description">Logo + Nom</p>
+                
                 <form action="{{ route('admin.partners.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label>Nom du Partenaire</label>
-                        <input type="text" name="name" class="form-control" placeholder="Ex: ISO Certification" required>
+                        <input type="text" name="name" class="form-control" placeholder="Ex: CocaCola" required>
                     </div>
+                    
                     <div class="form-group">
-                        <label>Logo (Image)</label>
-                        <input type="file" name="logo_file" class="form-control" required onchange="previewLogo(this)">
-                        <img id="logo-preview" src="#" class="mt-3 d-none rounded border" width="100%">
+                        <label>Logo de l'entreprise</label>
+                        <input type="file" name="image" class="file-upload-default" required>
+                        <div class="input-group col-xs-12">
+                            <input type="text" class="form-control file-upload-info" disabled placeholder="Choisir une image">
+                            <span class="input-group-append">
+                                <button class="file-upload-browse btn btn-gradient-primary" type="button">Parcourir</button>
+                            </span>
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-gradient-primary btn-block">Ajouter le partenaire</button>
+
+                    <div class="form-group">
+                        <label>Ordre d'affichage</label>
+                        <input type="number" name="order" class="form-control" value="0">
+                    </div>
+
+                    <button type="submit" class="btn btn-gradient-primary mr-2 btn-block">Ajouter</button>
                 </form>
             </div>
         </div>
     </div>
 
+    <!-- Liste des partenaires -->
     <div class="col-md-8 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
-                <h4 class="card-title">Liste des Logos</h4>
-                <div class="row">
-                    @forelse($partners as $partner)
-                    <div class="col-md-3 col-sm-6 mb-4 text-center">
-                        <div class="border rounded p-2 position-relative bg-light h-100">
-                            <img src="{{ asset($partner->logo) }}" class="img-fluid mb-2" style="max-height: 60px; object-fit: contain;">
-                            <p class="small mb-2 font-weight-bold">{{ $partner->name }}</p>
-                            
-                            <form action="{{ route('admin.partners.destroy', $partner->id) }}" method="POST">
-                                @csrf @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-xs py-1 px-2" onclick="return confirm('Supprimer ce partenaire ?')">
-                                    <i class="mdi mdi-delete"></i>
-                                </button>
-                            </form>
-                        </div>
-                    </div>
-                    @empty
-                    <div class="col-12 text-center text-muted py-5">
-                        <i class="mdi mdi-alert-circle-outline mdi-36px"></i>
-                        <p>Aucun partenaire trouvé.</p>
-                    </div>
-                    @endforelse
+                <h4 class="card-title">Partenaires Actuels</h4>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr class="bg-light">
+                                <th> Logo </th>
+                                <th> Nom </th>
+                                <th> Ordre </th>
+                                <th> Action </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse($partners as $partner)
+                            <tr>
+                                <td>
+                                    @if($partner->image)
+                                        <img src="{{ asset($partner->image) }}" style="max-height: 50px; max-width: 100px;">
+                                    @else
+                                        <span class="text-muted">Pas d'image</span>
+                                    @endif
+                                </td>
+                                <td class="font-weight-bold"> {{ $partner->name }} </td>
+                                <td> {{ $partner->order }} </td>
+                                <td>
+                                    <form action="{{ route('admin.partners.destroy', $partner->id) }}" method="POST" onsubmit="return confirm('Supprimer ce partenaire ?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-outline-danger btn-sm">
+                                            <i class="mdi mdi-trash-can"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                            @empty
+                            <tr>
+                                <td colspan="4" class="text-center text-muted">Aucun partenaire trouvé.</td>
+                            </tr>
+                            @endforelse
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
-<script>
-    function previewLogo(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById('logo-preview').src = e.target.result;
-                document.getElementById('logo-preview').classList.remove('d-none');
-            }
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-</script>
 @endsection
