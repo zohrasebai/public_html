@@ -1,71 +1,192 @@
 @php
-    // جلب البيانات من قاعدة البيانات
+    // On récupère les sliders depuis la BDD
     $activeSliders = \App\Models\Slider::orderBy('order', 'asc')->get();
-
-    // في حال كانت قاعدة البيانات فارغة، نستخدم الصور الافتراضية كاحتياط
-    $k1 = asset('assets/images/slider/k1.png');
-    $k2 = asset('assets/images/slider/k2.png');
-    $k3 = asset('assets/images/slider/k3.png');
-    $f1 = asset('assets/images/slider/f1.png');
-    $f2 = asset('assets/images/slider/f2.png');
+    
+    // On récupère le chemin de la vidéo depuis la BDD
+    $videoPath = asset($video->video_file);
 @endphp
 
-<div class="full-row p-0 overflow-hidden">
-    <div id="slider" style="width:1920px; height:850px; margin:0 auto; margin-bottom: 0px;">
-        
-        @foreach($activeSliders as $index => $item)
+<style>
+    /* --- STYLE HERO SECTION --- */
+   body {
+    margin: 0 !important;
+    padding-top: 0 !important;
+}
 
-            {{-- السلايد الأول (Index 0) --}}
-            @if($index == 0)
-            <div class="ls-slide" data-ls="bgsize:auto; bgposition:50% 80%; transitionorigami:true; kenburnsscale:1.2;">
-                <img width="1920" height="1281" src="{{ asset($item->image) }}" class="ls-bg" alt=""/>
-                
-                <p style="text-shadow: 0 15px 15px rgba(0,0,0,.5);top:44%; left:50%; text-align:center; font-weight:700; font-size:80px; font-family:Nunito Sans; width:60%; line-height:110px; white-space:normal;" class="ls-l color-white" data-ls="durationin:2000; easingin:easeOutQuart; fadein:false; rotatein:-3; offsetxout:left; durationout:750; startatout:allinandloopend + 1500; easingout:easeInQuart; fadeout:false; rotateout:-10; texttransitionin:true; texttypein:words_center; textoffsetyin:50|-50; textdurationin:1500; texteasingin:easeOutQuart; textstartatin:transitioninstart + 0;">{{ $item->title_fr }}</p>
+.hero-section {
+    margin-top: 0 !important;
+    padding-top: 1 !important;
+}
+    
+    .hero-text h1 {
+        color: #1c2c52; /* Bleu Marine */
+        font-weight: 800;
+        line-height: 1.2;
+        margin-bottom: 20px;
+    }
 
-                {{-- طبقات النصوص الجانبية (نص شفاف + Overlay) --}}
-                @foreach(['opacity:.2; mix-blend-mode:normal;', 'mix-blend-mode:overlay;'] as $style)
-                <p style="top:65%; left:480px; {{ $style }} font-family:Nunito Sans; font-size:96px;" class="ls-l color-white" data-ls="offsetxin:right; durationin:750; delayin:4000; easingin:easeOutQuart; rotatein:-80; easingout:easeInQuart; rotateout:-120; scalexout:0; scaleyout:0; loop:true; loopoffsetx:-80; loopoffsety:10; loopduration:2000; loopstartat:transitioninend - 500; loopeasing:easeInOutQuart; looprotate:-10; loopscalex:.6; loopscaley:.6; looptransformorigin:slidercenter slidermiddle 0; loopcount:1; static:2; rotation:-90;">{{ $item->subtitle_fr }}</p>
+    .hero-text .highlight {
+        color: #176363; /* Bleu Vert Principal */
+    }
+
+    .hero-text p {
+        font-size: 1.1rem;
+        color: #555;
+        margin-bottom: 30px;
+    }
+
+    .hero-btn {
+        background-color: #176363;
+        color: #fff;
+        padding: 12px 30px;
+        border-radius: 5px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: 0.3s;
+        border: 2px solid #176363;
+    }
+
+    .hero-btn:hover {
+        background-color: #fff;
+        color: #176363;
+    }
+
+    /* --- CONTENEUR VIDEO --- */
+    .video-container {
+        position: relative;
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        background: #000;
+    }
+    
+    video {
+        width: 100%;
+        height: auto;
+        display: block;
+        outline: none;
+    }
+
+    /* --- STYLE DES BOUTONS (Commun) --- */
+    .video-btn {
+        position: absolute;
+        bottom: 20px;
+        width: 50px;
+        height: 50px;
+        background-color: rgba(28, 44, 82, 0.8);
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        font-size: 20px;
+    }
+
+    .video-btn:hover {
+        background-color: #1c2c52;
+        transform: scale(1.1);
+    }
+
+    /* Positionnement des boutons */
+    .btn-play-pause {
+        right: 20px; /* À droite */
+    }
+
+    .btn-sound {
+        right: 80px; /* Un peu plus à gauche (80px) */
+    }
+</style>
+
+<!-- SECTION HERO -->
+<section class="hero-section d-flex align-items-center">
+    <div class="container">
+        <div class="row align-items-center">
+            
+            <!-- COLONNE GAUCHE : TEXTE -->
+            <div class="col-lg-6 mb-5 mb-lg-0 hero-text">
+                <span class="badge badge-pill px-3 py-2 mb-3" style="background:#e6f7ff; color:#176363; font-size:0.9rem;">
+                    Accompagnement  & Conseil
+                </span>
                 
-                <p style="top:50%; left:550px; text-align:left; {{ $style }} font-family:Nunito Sans; font-size:100px; line-height:100px;" class="ls-l color-white" data-ls="offsetxin:right; durationin:750; delayin:4000; easingin:easeOutQuart; rotatein:10; easingout:easeInQuart; rotateout:-120; scalexout:0; scaleyout:0; loop:true; loopduration:2000; loopstartat:transitioninend - 500; loopeasing:easeInOutQuart; looprotate:-10; loopscalex:.6; loopscaley:.6; looptransformorigin:slidercenter slidermiddle 0; loopcount:1; static:2;">
-                    {!! nl2br(e($item->description_fr)) !!}
-                </p>
-                @endforeach
+                <h1>Votre partenaire vers <span class="highlight">LA CERTIFICATION</span></h1>
+                
+                <p>Accompagnement, Formation et Audit. Nous transformons les ambitions de votre entreprise en résultats durables.</p>
+                
+                <div class="d-flex gap-3">
+                    <a href="#causes" class="hero-btn">Découvrir nos services</a>
+                   
+                </div>
             </div>
 
-            {{-- السلايد الثاني (Index 1) --}}
-            @elseif($index == 1)
-            <div class="ls-slide" data-ls="bgsize:auto; bgposition:50% 100%; duration:2700; transition2d:5; transitionduration:1; kenburnsscale:1.2;">
-                <img width="1920" height="1281" src="{{ asset($item->image) }}" class="ls-bg" alt="" />
-                
-                {{-- العناصر الزخرفية الديناميكية من قاعدة البيانات --}}
-                <img width="706" height="579" src="{{ asset($item->k1_img ?? $k1) }}" class="ls-l" style="top:79px; left:-19px;" data-ls="offsetxin:left; durationin:1250; rotatein:-60;">
-                <img width="439" height="564" src="{{ asset($item->k2_img ?? $k2) }}" class="ls-l" style="top:95px; left:1219px;" data-ls="offsetxin:500; durationin:1250; delayin:250; rotatein:60;">
-                <img width="439" height="581" src="{{ asset($item->k3_img ?? $k3) }}" class="ls-l" style="top:69px; left:868px;" data-ls="offsetyin:-680; durationin:1250; delayin:500; rotatein:60;">
-                
-                {{-- صور الـ F تأتي من الأعمدة الجديدة --}}
-                <img width="800" height="553" src="{{ asset($item->f1_img ?? $f1) }}" class="ls-l" style="top:-229px; left:-38px;" data-ls="offsetxin:-200; offsetyin:top; durationin:2400; rotatein:-30;">
-                <img width="592" height="687" src="{{ asset($item->f2_img ?? $f2) }}" class="ls-l" style="top:169px; left:652px;" data-ls="offsetxin:200; offsetyin:bottom; durationin:2700; rotatein:20;">
-                
-                @if(!empty($item->title_fr))
-                    <p style="top:50%; left:50%; text-align:center; font-weight:700; font-size:60px;" class="ls-l color-white" data-ls="durationin:1000;">{{ $item->title_fr }}</p>
-                @endif
+            <!-- COLONNE DROITE : VIDEO -->
+            <div class="col-lg-6">
+                <div class="video-container">
+                    
+                    <!-- LE LECTEUR VIDEO -->
+                    <video 
+                        id="heroVideo"
+                        autoplay 
+                        loop 
+                        playsinline 
+                        preload="auto">
+                        <source src="{{ $videoPath }}" type="video/mp4">
+                        Votre navigateur ne supporte pas la vidéo.
+                    </video>
+
+                    <!-- BOUTON DE CONTRÔLE -->
+                    <!-- Bouton Play / Pause -->
+                    <button class="video-btn btn-play-pause" onclick="toggleHeroVideo()">
+                        <i id="videoIcon" class="fa fa-pause" aria-hidden="true"></i>
+                    </button>
+
+                    <!-- Bouton Son -->
+                    <button class="video-btn btn-sound" onclick="toggleHeroSound()">
+                        <i id="soundIcon" class="fa fa-volume-up" aria-hidden="true"></i>
+                    </button>
+                </div>
             </div>
 
-            {{-- السلايد الثالث وما يليه --}}
-            @else
-            <div class="ls-slide" data-ls="bgsize:auto; bgposition:50% 100%; duration:7500; transitionorigami:true; kenburnsscale:1.2;">
-                <img width="1920" height="1281" src="{{ asset($item->image) }}" class="ls-bg" alt="" />
-                
-                <p style="text-shadow: 0 5px 10px rgba(0,0,0,.5);top:235px; left:330px; text-align:center; font-weight:700; font-size:50px; width:60%; font-family:Nunito Sans; white-space:normal;" class="ls-l color-primary" data-ls="offsetyin:-50; easingin:easeOutCubic; rotatexin:30;">{{ $item->title_fr }}</p>
-
-                <p style="text-shadow: 0 1px 2px rgba(0,0,0,.65);top:335px; left:630px; text-align:left; font-weight:400; font-size:24px; font-family:'Roboto', sans-serif; color:#ffffff; line-height:55px; width:500px;" class="ls-l" data-ls="transitionin:false; texttransitionin:true; texttypein:lines_asc; textstartatin:transitioninend + 500;">
-                    {!! nl2br(e($item->description_fr)) !!}
-                </p>
-                
-                <p style="text-shadow: 0 1px 2px rgba(0,0,0,.65);top:330px; left:50%; text-align:right; font-weight:600; font-size:50px; font-family:'Roboto', sans-serif; color:#ffffff;" class="ls-l" data-ls="offsetyin:-30; delayin:5800; easingin:easeOutQuint;">{{ $item->subtitle_fr }}</p>
-            </div>
-            @endif
-
-        @endforeach
+        </div>
     </div>
-</div>
+</section>
+
+<!-- SCRIPTS POUR LES BOUTONS -->
+<script>
+    // 1. Gérer le Play / Pause
+    function toggleHeroVideo() {
+        var video = document.getElementById('heroVideo');
+        var icon = document.getElementById('videoIcon');
+        
+        if(video.paused) {
+            video.play();
+            icon.classList.remove('fa-play');
+            icon.classList.add('fa-pause');
+        } else {
+            video.pause();
+            icon.classList.remove('fa-pause');
+            icon.classList.add('fa-play');
+        }
+    }
+
+    // 2. Gérer le Son
+    function toggleHeroSound() {
+        var video = document.getElementById('heroVideo');
+        var icon = document.getElementById('soundIcon');
+        
+        if(video.muted) {
+            video.muted = false; 
+            // Icône : Haut-parleur normal
+            icon.classList.remove('fa-volume-off'); 
+            icon.classList.add('fa-volume-up');
+        } else {
+            video.muted = true; 
+            // Icône : Haut-parleur barré
+            icon.classList.remove('fa-volume-up'); 
+            icon.classList.add('fa-volume-off');
+        }
+    }
+</script>

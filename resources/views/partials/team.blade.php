@@ -51,17 +51,7 @@
                     <p>{{ $teamDesc ?? '' }}</p>
                 </div>
             </div>
-            <div class="col-md-12 col-lg-12">
-                <div class="owl-carousel team-slider-1 owl-nav-style-one position-relative mt-30">
-                    @foreach($teamMembers as $member)
-                    <div class="member-profile color-secondery-a">
-                        <div class="overflow-hidden"><img src="{{ $member['img'] ?? '' }}" alt="image"></div>
-                        <h4 class="mt-15"><a href="{{ $member['link'] ?? '#' }}">{{ $member['name'] ?? '' }}</a></h4>
-                        <span class="color-gray">{{ $member['role'] ?? '' }}</span>
-                    </div>
-                    @endforeach
-                </div>
-            </div>
+            
         </div>
     </div>
 </section>

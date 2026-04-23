@@ -24,12 +24,8 @@
     $footerLinks = [
         ['url' => '#services', 'label' => 'Nos Domaines de Compétence'],
         ['url' => '#about', 'label' => 'Qui sommes-nous ?'],
-        ['url' => '#values', 'label' => 'Nos Valeurs'],
-        ['url' => '#', 'label' => 'Formation et Coaching'],
-        ['url' => '#', 'label' => 'Audits et Diagnostics'],
-        ['url' => '#', 'label' => 'Certification ISO'],
-        ['url' => '#', 'label' => 'Conseil Stratégique'],
-        ['url' => '#', 'label' => 'HACCP & Sécurité Aliments'],
+        ['url' => '#core', 'label' => 'Nos Valeurs'],
+        ['url' => '#partners', 'label' => 'Clients qui nous font confiance'],
     ];
 
     $footerSubscribeText = 'Restez informé de nos dernières actualités et conseils sur les normes et la performance durable.';
@@ -59,16 +55,12 @@
                     <div class="text-area color-white">
                         <p>{{ $footerText ?? '' }}</p>
                     </div>
-                    <ul class="widget-contact-info color-white icon-primary link-list-b-15 mt-30">
-                        @foreach($footerContacts as $contact)
-                        <li><span class="mr-20"><i class="{{ $contact['icon'] ?? '' }}" aria-hidden="true"></i></span> {{ $contact['text'] ?? '' }}</li>
-                        @endforeach
-                    </ul>
+                
                 </div>
             </div>
             <div class="col-xl-3 col-lg-4 col-md-6">
                 <div class="footer-widget">
-                    <h3 class="footer-widget-title position-relative va-lb-line-w50-h2-primary pb-15 mb-20 color-white">Recent News</h3>
+                    <h3 class="footer-widget-title position-relative va-lb-line-w50-h2-primary pb-15 mb-20 color-white">Dernières nouvelles</h3>
                     <ul class="hover-white-primary link-list-b-20">
                         @foreach($footerNews as $news)
                         <li>
@@ -93,12 +85,12 @@
             </div>
             <div class="col-xl-4 col-lg-12 col-md-6">
                 <div class="footer-widget color-white xl-mt-50">
-                    <h3 class="footer-widget-title position-relative va-lb-line-w50-h2-primary pb-15 mb-20 color-white">Subscribe</h3>
-                    <p>{{ $footerSubscribeText ?? '' }}</p>
-                    <form class="mt-30">
-                        <input class="form-control" name="subscribe" type="text" placeholder="Subscribe">
-                        <button class="btn btn-primary mt-15">Subscribe</button>
-                    </form>
+                    <h3 class="footer-widget-title position-relative va-lb-line-w50-h2-primary pb-15 mb-20 color-white">Nous contacter</h3>
+    <ul class="widget-contact-info color-white icon-primary link-list-b-15 mt-30">
+                        @foreach($footerContacts as $contact)
+                        <li><span class="mr-20"><i class="{{ $contact['icon'] ?? '' }}" aria-hidden="true"></i></span> {{ $contact['text'] ?? '' }}</li>
+                        @endforeach
+                    </ul>
                     <ul class="socal media-two d-inline-block color-secondery mt-30">
                         @foreach($footerSocial as $social)
                         <li><a href="{{ $social['url'] ?? '#' }}"><i class="{{ $social['icon'] ?? '' }}" aria-hidden="true"></i></a></li>
