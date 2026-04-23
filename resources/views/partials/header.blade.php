@@ -1,42 +1,40 @@
-{{-- 
-    DESIGN PRÉSERVÉ - HEADER DYNAMIQUE 
-    Aucune modification visuelle, seule la source des données change.
---}}
 @php
-    // Fallbacks au cas où la BDD est vide
-    $logoPath = $global_settings['logo'] ?? 'assets/images/logo/Image1.png';
-    $sitePhone = $global_settings['phone'] ?? '0699 75 80 30';
-    $siteEmail = $global_settings['email'] ?? 'qualiproplus16@gmail.com';
+    // Récupération des paramètres globaux
+    $phone = $global_settings['phone'] ?? "0699 75 80 30 / 0776 70 75 80"; 
+    $email = $global_settings['email'] ?? "qualiproplus16@gmail.com";
+    $logo  = asset('assets/images/logo/Image1.png'); 
+    
+    $footerSocial = [
+        ['icon' => 'fa fa-facebook', 'url' => 'https://www.facebook.com/share/17Sx6r89As/'],
+        ['icon' => 'fa fa-linkedin', 'url' => 'https://www.linkedin.com/company/qualipro-plus/'],
+        ['icon' => 'fa fa-instagram', 'url' => 'https://www.instagram.com/quali_proplus'],
+    ];
+
+    $home_link = route('home');
+
+    $achievements = [
+        (object)['icon' => 'fa fa-lightbulb-o', 'title' => 'Accompagnement', 'desc' => 'Systèmes & Certifications'],
+        (object)['icon' => 'fa fa-user-circle-o', 'title' => 'Formation', 'desc' => 'Développement des compétences'],
+        (object)['icon' => 'fa fa-check-square-o', 'title' => 'Audit ', 'desc' => 'Conformité & Performance'],
+    ];
 @endphp
 
 <style>
-    /* --- STYLE HEADER FIXE (TON CODE ORIGINAL) --- */
-    .header-4 {
-        position: fixed !important; 
-        top: 0 !important;
-        left: 0 !important;
-        width: 100% !important;
-        z-index: 9999 !important;
-        background-color: #ffffff !important; 
+    /* Empêcher le bandeau jaune de dépasser */
+    .nav-header {
+        position: relative;
+        overflow: visible !important; /* Changé en visible pour laisser descendre le sous-menu */
     }
 
-    .top-header {
-        position: relative; 
-        z-index: 9999 !important;
-    }
-    
-    .nav-header {
-        position: relative !important; 
-        overflow: visible !important;
-    }
-    
     .nav-header::after {
         bottom: 0 !important; 
         height: 100% !important; 
     }
 
+    /* Style des liens principaux (Raccourcis pour éviter que ce soit trop long) */
     .navbar-nav .nav-link {
-         text-transform: uppercase !important;
+         
+        text-transform: uppercase !important;
         font-size: 13px !important;
         font-weight: 800 !important;
         letter-spacing: 0.5px !important;
@@ -49,48 +47,55 @@
         color: #00bcd4 !important; 
     }
 
-    /* --- STYLE DU MENU DÉROULANT --- */
+    /* 🔥 FORCE L'APPARITION DU SOUS-MENU AU SURVOL 🔥 */
     .dropdown:hover .dropdown-menu {
         display: block !important;
-        position: absolute !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+    }
+
+    /* Style de la boîte qui contient les sous-titres */
+    .dropdown-menu {
+        display: none;
+        position: absolute;
         background-color: #ffffff !important;
         border: 1px solid #e0e0e0 !important;
         box-shadow: 0px 5px 15px rgba(0,0,0,0.1) !important;
         padding: 10px 0 !important;
         min-width: 160px;
         z-index: 9999 !important;
-        top: 100% !important; 
-        left: 0 !important;
+        top: 100%; /* Se place juste en dessous du titre */
+        left: 0;
     }
 
+    /* Style des liens à l'intérieur du sous-menu */
     .dropdown-item {
-        display: block !important;
-        width: 100% !important;
+        display: block;
+        width: 100%;
         padding: 8px 20px !important;
         color: #176363 !important;
         font-size: 13px !important;
         font-weight: 800 !important;
-        text-decoration: none !important;
-        transition: all 0.3s ease !important;
+        text-decoration: none;
+        transition: all 0.3s ease;
     }
 
     .dropdown-item:hover {
         background-color: #f8f9fa !important;
-        color: #00bcd4 !important; 
-        padding-left: 25px !important;
+        color: #00bcd4 !important;
     }
 </style>
 
 <header id="header" class="header-4 nav-on-top">
 
-    {{-- TOP HEADER (Téléphone, Email, Réseaux sociaux) --}}
+    {{-- TOP HEADER --}}
     <div id="top" class="top-header bg-secondery color-white icon-primary d-md-none d-lg-block">
         <div class="container">
             <div class="row">
                 <div class="col-lg-5 col-md-5">
                     <ul>
-                        <li><i class="fa fa-phone mr-10"></i>{{ $sitePhone }}</li>
-                        <li><i class="fa fa-envelope mr-10"></i>{{ $siteEmail }}</li>
+                        <li><i class="fa fa-phone mr-10"></i>{{ $phone }}</li>
+                        <li><i class="fa fa-envelope mr-10"></i>{{ $email }}</li>
                     </ul>
                 </div>
                 <div class="col-lg-7 col-md-7">
@@ -98,70 +103,54 @@
                         <li class="list-inline-item mr-10">
                             <span class="d-none d-md-inline opacity-75" style="font-weight: 900 !important;">Nous contacter :</span>
                         </li>
-                        {{-- Réseaux sociaux dynamiques --}}
-                        @if(!empty($global_settings['facebook_url']))
-                        <li class="list-inline-item">
-                            <a href="{{ $global_settings['facebook_url'] }}"><i class="fa fa-facebook"></i></a>
-                        </li>
-                        @endif
-                        @if(!empty($global_settings['linkedin_url']))
-                        <li class="list-inline-item">
-                            <a href="{{ $global_settings['linkedin_url'] }}"><i class="fa fa-linkedin"></i></a>
-                        </li>
-                        @endif
-                        @if(!empty($global_settings['instagram_url']))
-                        <li class="list-inline-item">
-                            <a href="{{ $global_settings['instagram_url'] }}"><i class="fa fa-instagram"></i></a>
-                        </li>
-                        @endif
+                        @foreach($footerSocial as $social)
+                            <li class="list-inline-item">
+                                <a href="{{ $social['url'] ?? '#' }}"><i class="{{ $social['icon'] ?? '' }}" aria-hidden="true"></i></a>
+                            </li>
+                        @endforeach
                     </ul>
                 </div>
             </div>
         </div>
     </div>
 
-    {{-- LOGO & INFOS (Accompagnement, Formation, Audit) --}}
+    {{-- LOGO & INFOS --}}
     <div class="logo-box py-30 bg-white">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-xl-3 col-lg-3 col-md-3 col-md-3">
+                <div class="col-xl-3 col-lg-3 col-md-3">
                     <a class="navbar-brand mt-1" href="{{ $home_link }}">
-                        {{-- LOGO DYNAMIQUE --}}
-                        <img src="{{ asset($logoPath) }}" alt="QualiPro Plus" style="max-height: 70px;">
+                        <img src="{{ $logo }}" alt="QualiPro Plus" style="max-height: 70px;">
                     </a>
                 </div>
 
                 <div class="col-xl-9 col-lg-9 col-md-10">
                     <div class="d-flex justify-content-end align-items-center h-100">
-                        {{-- BOÎTES "ACCOMPAGNEMENT, FORMATION, AUDIT" DYNAMIQUES --}}
-                        @forelse($achievements as $ach)
+                        @foreach($achievements as $ach)
                             <div class="d-flex align-items-center px-4 {{ !$loop->last ? 'border-right' : '' }}" style="border-color: #e0e0e0 !important;">
                                 
                                 <div class="icon-circle d-flex align-items-center justify-content-center mr-3" 
                                      style="width: 42px; height: 42px; border-radius: 50%; background-color: rgba(0, 102, 102, 0.05);">
-                                    <i class="{{ $ach->icon ?? 'fa fa-star' }}" style="font-size: 18px; color: #176363;"></i>
+                                    <i class="{{ $ach->icon }}" style="font-size: 18px; color: #176363;"></i>
                                 </div>
                                 
                                 <div class="text-left">
                                     <h6 class="mb-0" style="font-weight: 900; color: #176363; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px;">
-                                        {{ $ach->title ?? 'Titre' }}
+                                        {{ $ach->title }}
                                     </h6>
                                     <p class="mb-0" style="font-size: 11px; color: #ff0000; line-height: 1.2;">
-                                        {{ $ach->subtitle ?? 'Description' }}
+                                        {{ $ach->desc }}
                                     </p>
                                 </div>
                             </div>
-                        @empty
-                            {{-- Fallback si l'admin n'a rien ajouté dans la table achievements --}}
-                            <div class="text-muted small">Aucune info disponible</div>
-                        @endforelse
+                        @endforeach
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    {{-- NAVBAR (Menu Principal) --}}
+    {{-- NAVBAR --}}
     <div class="nav-header bg-gray py-10 position-relative">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light px-0">
@@ -178,8 +167,8 @@
                             <a class="nav-link" href="{{ $home_link }}">Accueil</a>
                         </li>
 
-                        {{-- 2. Qui nous sommes --}}
-                       <li class="nav-item dropdown hover-dropdown">
+                        {{-- 2. Qui nous sommes (Avec ses sous-titres cachés dedans) --}}
+                       <li class="nav-item dropdown">
                             <a class="nav-link" href="#about">
                                 Qui nous sommes <i class="fa fa-angle-down ml-1" style="font-size: 12px;"></i>
                             </a>
@@ -189,7 +178,7 @@
                             </div>
                         </li>
 
-                        {{-- 3. Compétences --}}
+                        {{-- 3. Compétences (Raccourci pour que ce soit moins long) --}}
                         <li class="nav-item">
                             <a class="nav-link" href="#causes">Nos Compétences</a>
                         </li>

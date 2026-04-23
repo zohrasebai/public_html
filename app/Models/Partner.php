@@ -6,5 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Partner extends Model
 {
-    protected $fillable = ['name', 'logo'];
+    // Les champs autorisés (identiques à la migration)
+    protected $fillable = [
+        'name',
+        'image',
+        'order',
+    ];
 }

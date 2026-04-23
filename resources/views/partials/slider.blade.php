@@ -31,10 +31,10 @@
 
     <style>
     .hero-section {
-        min-height: 600px;
+         min-height: auto;
+    
         background-color: #f8f9fa; 
-        padding-top: 50px;
-        padding-bottom: 50px;
+       
     }
     
     .hero-text h1 {
@@ -127,19 +127,16 @@
             <!-- COLONNE GAUCHE : TEXTE -->
             <div class="col-lg-6 mb-5 mb-lg-0 hero-text">
                 <span class="badge badge-pill px-3 py-2 mb-3" style="background:#e6f7ff; color:#176363; font-size:0.9rem;">
-                    EXPERT CERTIFICATION & AUDIT
+                    Accompagnement & AUDIT
                 </span>
-                <h1>Votre partenaire expert en <span class="highlight">Performance</span> & Certification</h1>
+                <h1>Votre partenaire vers la<span class="highlight">Certification</span></h1>
                 
                 <p>
-                    Accompagnement, Formation et Diagnostic. Nous transformons les ambitions de votre entreprise en résultats durables grâce à des solutions sur-mesure et rigoureuses.
+                    Accompagnement, Formation et Audit. Nous transformons les ambitions de votre entreprise en résultats durables.
                 </p>
                 
                 <div class="d-flex gap-3">
                     <a href="#about" class="hero-btn">Découvrir nos services</a>
-                    <a href="#partners" class="btn btn-outline-secondary px-4 py-2" style="border-radius:5px;">
-                        Nos Partenaires
-                    </a>
                 </div>
             </div>
 

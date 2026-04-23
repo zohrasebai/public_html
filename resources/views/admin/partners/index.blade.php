@@ -10,7 +10,7 @@
 </div>
 
 <div class="row">
-    <!-- Formulaire d'ajout SIMPLIFIÉ -->
+    <!-- Formulaire d'ajout -->
     <div class="col-md-4 grid-margin stretch-card">
         <div class="card">
             <div class="card-body">
@@ -57,10 +57,9 @@
                                 </td>
                                 <td> {{ $partner->name ?? '-' }} </td>
                                 <td>
+                                    {{-- FORMULAIRE DE SUPPRESSION CORRIGÉ --}}
                                     <form action="{{ route('admin.partners.destroy', $partner->id) }}" method="POST" onsubmit="return confirm('Supprimer ?');">
-                                      method="POST" 
-                                      enctype="multipart/form-data">   
-                                      @csrf
+                                        @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-outline-danger btn-sm">
                                             <i class="mdi mdi-trash-can"></i>

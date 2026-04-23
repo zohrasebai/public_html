@@ -5,7 +5,7 @@
 @section('content')
 
     {{-- Espace pour le header fixe --}}
-    <div style="height: 260px; width: 100%; pointer-events: none;"></div>
+ 
     
     @include('partials.header', [
         'global_settings' => $global_settings, 

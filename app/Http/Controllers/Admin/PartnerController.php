@@ -16,15 +16,14 @@ class PartnerController extends Controller
 
     public function store(Request $request)
     {
-        // 1. Validation simple
+        // 1. Validation
         $request->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        // 2. Récupération directe du fichier (Sans hasFile pour éviter les bugs)
+        // 2. Récupération du fichier
         $file = $request->file('image');
 
-        // Vérification de sécurité : Si null, on arrête
         if (!$file) {
             return back()->with('error', 'Erreur : Aucun fichier détecté.');
         }
@@ -35,18 +34,26 @@ class PartnerController extends Controller
             mkdir($uploadDir, 0777, true);
         }
 
-        // 4. Gestion du nom et du chemin
-        $filename = 'partner_' . time() . '.' . $file->getClientOriginalExtension();
+        // 4. Récupération EXTREMITÉMENT sécurisée de l'extension
+        $originalName = $file->getClientOriginalName();
+        $extension = pathinfo($originalName, PATHINFO_EXTENSION);
+        
+        if (empty($extension)) {
+            $extension = 'jpg';
+        }
+
+        // 5. Création du nom final
+        $filename = 'partner_' . time() . '.' . $extension;
         $dbPath = 'assets/images/partners/' . $filename;
 
-        // 5. Déplacement du fichier
+        // 6. Déplacement du fichier
         $file->move($uploadDir, $filename);
 
-        // 6. Sauvegarde en BDD
+        // 7. Sauvegarde en BDD (On utilise 'image' comme colonne)
         Partner::create([
             'name' => 'Partenaire-' . time(), 
             'image' => $dbPath,
-            'order' => 0
+            'order' => 0 
         ]);
 
         return back()->with('success', 'Image ajoutée avec succès.');
@@ -56,6 +63,7 @@ class PartnerController extends Controller
     {
         $partner = Partner::find($id);
         if ($partner) {
+            // Suppression de l'image du disque
             if ($partner->image && file_exists(public_path($partner->image))) {
                 unlink(public_path($partner->image));
             }
