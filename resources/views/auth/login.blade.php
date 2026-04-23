@@ -65,7 +65,7 @@
                 </div>
             @endif
 
-            <form class="position-relative md-mb-50" method="POST" action="{{ route('login.post') }}">
+            <form class="position-relative md-mb-50" method="POST" action="https://symmetrical-journey-6965p665jpvjfrxg6-8000.app.github.dev/connexion">
                 @csrf
                 <div class="form-logo text-center pb-30">
                     <img src="{{ asset('assets/images/S.png') }}" alt="logo-image" style="width: 80px;">

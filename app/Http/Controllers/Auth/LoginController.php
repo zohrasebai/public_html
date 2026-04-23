@@ -31,8 +31,8 @@ class LoginController extends Controller
             $request->session()->regenerate();
 
             // Redirection vers le tableau de bord (URL française)
-            return redirect()->intended(route('admin.dashboard'))
-                             ->with('success', 'Bienvenue sur votre tableau de bord.');
+            return redirect()->intended('https://symmetrical-journey-6965p665jpvjfrxg6-8000.app.github.dev/admin/tableau-de-bord')
+                 ->with('success', 'Bienvenue sur votre tableau de bord.');
         }
 
         // Erreur d'authentification en français

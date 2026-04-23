@@ -16,27 +16,35 @@ class VideoSectionController extends Controller
         return view('admin.video.index', compact('video'));
     }
 
-    public function update(Request $request) 
-    {
-        $video = VideoSection::firstOrCreate(['id' => 1]);
+public function update(Request $request)
+{
+    // 1. Récupérer la section vidéo existante
+    $video = VideoSection::first();
 
-        // معالجة صورة الفيديو
-        if ($request->hasFile('video_img_file')) {
-            if($video->video_img && File::exists(public_path($video->video_img))) {
-                File::delete(public_path($video->video_img));
+    // 2. Gérer UNiquement l'upload de fichier
+    if ($request->hasFile('video_file')) {
+        $file = $request->file('video_file');
+        
+        // Vérifier l'extension
+        if ($file->getClientOriginalExtension() == 'mp4') {
+            $filename = time() . '_video.' . $file->getClientOriginalExtension();
+            
+            // Créer le dossier s'il n'existe pas
+            if (!file_exists(public_path('videos'))) {
+                mkdir(public_path('videos'), 0777, true);
             }
-            $name = 'video_thumb_'.time().'.'.$request->video_img_file->extension();
-            $request->video_img_file->move(public_path('uploads/video'), $name);
-            $video->video_img = 'uploads/video/'.$name;
+
+            // Déplacer et sauvegarder
+            $file->move(public_path('videos'), $filename);
+            $video->video_file = 'videos/' . $filename;
+        } else {
+            return back()->with('error', 'Le fichier doit être au format MP4.');
         }
-
-        $video->update([
-            'video_url' => $request->video_url,
-            'title_fr'  => $request->title_fr,
-            'text_fr'   => $request->text_fr,
-            'video_img' => $video->video_img
-        ]);
-
-        return back()->with('success', 'Section Vidéo mise à jour !');
     }
+
+    // 3. Sauvegarder (On ne touche PAS aux titres/descriptions)
+    $video->save();
+
+    return redirect()->back()->with('success', 'Vidéo mise à jour avec succès.');
+}
 }

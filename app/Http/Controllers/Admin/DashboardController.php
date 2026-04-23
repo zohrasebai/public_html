@@ -15,24 +15,53 @@ class DashboardController extends Controller
         return view('admin.dashboard');
     }
 
-    // --- Section Paramètres (Téléphone, Email) ---
-    public function settings() {
+    // =========================================
+    // --- GESTION DES PARAMÈTRES (Settings) ---
+    // =========================================
+    public function settings()
+    {
+        // On récupère tous les réglages sous forme de tableau clé => valeur
         $settings = Setting::pluck('value', 'key');
-        return view('admin.settings', compact('settings'));
+        
+        // On passe aussi les stats pour le haut de page (optionnel)
+        $global_achievements = Achievement::all();
+        
+        // Note: La vue doit être dans admin/settings/index.blade.php
+        return view('admin.settings.index', compact('settings', 'global_achievements'));
     }
 
-    public function updateSettings(Request $request) {
-        $data = $request->only(['phone', 'email']);
-        foreach ($data as $key => $value) {
+    public function updateSettings(Request $request)
+    {
+        // 1. Mise à jour des textes simples (Tél, Email, Réseaux...)
+        $inputs = $request->only(['phone', 'email', 'address', 'footer_text', 'facebook_url', 'linkedin_url', 'instagram_url']);
+        
+        foreach ($inputs as $key => $value) {
             Setting::updateOrCreate(['key' => $key], ['value' => $value]);
         }
-        return back()->with('success', 'Paramètres généraux mis à jour avec succès !');
+
+        // 2. Gestion du Logo (Upload d'image)
+        if ($request->hasFile('logo')) {
+            $file = $request->file('logo');
+            $filename = time() . '_logo.' . $file->getClientOriginalExtension();
+            
+            // On déplace le fichier dans public/logos
+            // Assure-toi que le dossier public/logos existe ou est accessible en écriture
+            $file->move(public_path('logos'), $filename);
+            
+            $path = 'logos/' . $filename;
+            
+            // On sauvegarde le chemin dans la BDD
+            Setting::updateOrCreate(['key' => 'logo'], ['value' => $path]);
+        }
+
+        return redirect()->back()->with('success', 'Paramètres mis à jour avec succès.');
     }
 
-    // --- Section Liens de Navigation ---
+    // =========================================
+    // --- GESTION DES LIENS DE NAVIGATION ---
+    // =========================================
     public function navLinks() {
         $navLinks = NavLink::orderBy('position')->get();
-        // ملاحظة: تأكد أن اسم الملف هو nav-links.blade.php كما في التوجيهات السابقة
         return view('admin.nav_links', compact('navLinks'));
     }
 
@@ -50,22 +79,34 @@ class DashboardController extends Controller
         return back()->with('success', 'Les liens du menu ont été mis à jour !');
     }
 
-    // --- Section Réalisations (Achievements) ---
-    public function achievements() {
-        $achievements = Achievement::orderBy('order')->get();
-        return view('admin.achievements', compact('achievements'));
+    // =========================================
+    // --- GESTION DES RÉALISATIONS (Achievements) ---
+    // =========================================
+    public function achievements()
+    {
+        $global_achievements = Achievement::orderBy('order')->get();
+        // La vue doit être admin/achievements/index.blade.php
+        return view('admin.achievements.index', compact('global_achievements'));
     }
 
-    public function updateAchievements(Request $request) {
-        if ($request->has('achievements')) {
-            foreach ($request->achievements as $id => $data) {
-                Achievement::where('id', $id)->update([
-                    'count' => $data['count'],
-                    'title' => $data['title'],
-                    'order' => $data['order'],
-                ]);
-            }
-        }
-        return back()->with('success', 'Les statistiques ont été mises à jour avec succès !');
+    // Suppression de la fonction 'updateAchievements' (ancienne version bulk edit)
+    // Car on utilise maintenant 'store' (ajout unique) et 'destroy' (suppression)
+
+    public function storeAchievement(Request $request)
+    {
+        Achievement::create([
+            'title' => $request->title,
+            'subtitle' => $request->subtitle,
+            'icon' => $request->icon,
+            'order' => $request->order ?? 0
+        ]);
+
+        return redirect()->back()->with('success', 'Réalisation ajoutée avec succès.');
+    }
+
+    public function destroyAchievement($id)
+    {
+        Achievement::destroy($id);
+        return redirect()->back()->with('success', 'Réalisation supprimée.');
     }
 }

@@ -7,43 +7,35 @@
         
         <form action="{{ route('admin.video.update') }}" method="POST" enctype="multipart/form-data">
             @csrf @method('PUT')
+            
             <div class="row">
+                <!-- Colonne Gauche : Fichier -->
                 <div class="col-md-5">
-                    <label>Image de Couverture (Thumbnail)</label>
-                    <div class="mb-3 position-relative" onclick="document.getElementById('v_img').click()" style="cursor:pointer;">
-                        <img id="prev-v-img" src="{{ asset($video->video_img) }}" class="w-100 rounded shadow-sm" style="height:200px; object-fit:cover;">
-                        <input type="file" name="video_img_file" id="v_img" hidden onchange="preview(this, 'prev-v-img')">
-                    </div>
-
                     <div class="form-group">
-                        <label>Lien Vidéo (YouTube/Vimeo)</label>
-                        <input type="text" name="video_url" class="form-control" value="{{ $video->video_url }}" placeholder="https://www.youtube.com/watch?v=...">
+                        <label>Fichier Vidéo (MP4)</label>
+                        <input type="file" name="video_file" class="form-control">
+                        <small class="text-muted">Attention : Limite de taille serveur (~10MB).</small>
+                        
+                        @if($video->video_file)
+                            <p class="mt-2 text-success">
+                                <strong>Vidéo actuelle :</strong> {{ $video->video_file }}
+                            </p>
+                        @else
+                            <p class="mt-2 text-muted">Aucune vidéo uploadée.</p>
+                        @endif
                     </div>
                 </div>
 
+                <!-- Colonne Droite : Bouton -->
                 <div class="col-md-7">
-                    <div class="form-group">
-                        <label>Titre de la Section</label>
-                        <input type="text" name="title_fr" class="form-control" value="{{ $video->title_fr }}">
+                    <div class="d-flex align-items-center h-100">
+                        <button type="submit" class="btn btn-gradient-primary btn-block btn-lg">
+                            <i class="mdi mdi-upload"></i> Mettre à jour la vidéo
+                        </button>
                     </div>
-                    <div class="form-group">
-                        <label>Description Longue</label>
-                        <textarea name="text_fr" class="form-control" rows="6">{{ $video->text_fr }}</textarea>
-                    </div>
-                    <button type="submit" class="btn btn-gradient-primary btn-block btn-lg">Mettre à jour le contenu</button>
                 </div>
             </div>
         </form>
     </div>
 </div>
-
-<script>
-function preview(input, id) {
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function(e) { document.getElementById(id).src = e.target.result; }
-        reader.readAsDataURL(input.files[0]);
-    }
-}
-</script>
 @endsection

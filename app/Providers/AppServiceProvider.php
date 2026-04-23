@@ -8,35 +8,42 @@ use App\Models\Setting;
 use App\Models\NavLink;
 use App\Models\Achievement;
 use Illuminate\Support\Facades\Schema;
-
+use Illuminate\Support\Facades\URL; 
 
 class AppServiceProvider extends ServiceProvider
 {
-    public function register(): void { }
+    public function register(): void
+    {
+        //
+    }
 
     public function boot()
-{
-    // استدعاء الواجهة في الأعلى: use Illuminate\Support\Facades\Schema;
+    {
+        // --- FIX POUR CODESPACE : FORCER HTTPS ET L'URL RACINE ---
+        URL::forceScheme('https');
+        
+        // Remplace par TON adresse Codespace exactement (celle dans ta barre d'adresse)
+        URL::forceRootUrl('https://symmetrical-journey-6965p665jpvjfrxg6-8000.app.github.dev');
 
-    try {
-        // حماية جلب الروابط
-        if (Schema::hasTable('nav_links')) {
-            $navLinks = \App\Models\NavLink::orderBy('position', 'asc')->get();
-            // تأكد من استخدام هذا الاسم بالضبط في ملف الـ Blade
-            view()->share('global_nav_links', $navLinks); 
-        }
+        // --- PARTAGE DES VARIABLES GLOBALES ---
+        try {
+            // Protection pour les liens de navigation
+            if (Schema::hasTable('nav_links')) {
+                $navLinks = \App\Models\NavLink::orderBy('position', 'asc')->get();
+                view()->share('global_nav_links', $navLinks);
+            }
 
-        // حماية جلب الإعدادات (هذا هو سبب الخطأ الأخير لديك)
-        if (Schema::hasTable('settings')) {
-            view()->share('global_settings', \App\Models\Setting::pluck('value', 'key')->toArray());
-        }
+            // Protection pour les paramètres (Settings)
+            if (Schema::hasTable('settings')) {
+                view()->share('global_settings', \App\Models\Setting::pluck('value', 'key')->toArray());
+            }
 
-        // حماية الإنجازات
-        if (Schema::hasTable('achievements')) {
-            view()->share('global_achievements', \App\Models\Achievement::orderBy('order')->get());
+            // Protection pour les réalisations (Achievements)
+            if (Schema::hasTable('achievements')) {
+                view()->share('global_achievements', \App\Models\Achievement::orderBy('order')->get());
+            }
+        } catch (\Exception $e) {
+            // Ignore les erreurs si les tables n'existent pas encore
         }
-    } catch (\Exception $e) {
-        // في حال وجود أي خطأ أثناء الـ Migration، سيتجاهل لارافل الاستعلام ويكمل العمل
     }
-}
 }
